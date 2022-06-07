@@ -1,0 +1,22 @@
+.navbar .nav-link.active .nav-link-indicator {
+  width: 100%;
+}
+
+.navbar .nav-link:hover > .nav-link-indicator {
+  width: 100%;
+}
+
+/*.navbar .search-btn:hover {*/
+.navbar .search-btn:hover {
+  width: clamp(200px, 10vw, 300px);
+  justify-content: flex-start;
+}
+
+/*.navbar .search-btn:hover > .search-icon {*/
+.navbar .search-btn:hover > .search-icon {
+  margin-left: 1em;
+}
+
+.navbar .search-btn:hover > .search-input {
+  width: 60%;
+}
