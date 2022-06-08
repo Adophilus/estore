@@ -6,12 +6,9 @@ import { useEffect } from 'react'
 let cartLength = 0
 
 export default ({ store }) => {
-  useEffect(
-    function (change) {
-      cartLength = Object.keys(store.cart)
-    },
-    [store.cart]
-  )
+  useEffect(function (change) {
+    cartLength = Object.keys(store.cart)
+  }, [])
 
   return (
     <header className="text-gray-600 body-font navbar">
@@ -46,8 +43,8 @@ export default ({ store }) => {
           </div>
           <div className="flex items-center relative hover:cursor-pointer justify-center text-white bg-indigo-500 border-0 w-14 h-14 hover:bg-indigo-600 rounded-full">
             <ShoppingCartIcon className="w-6 h-6" />
-            <span className="bg-[#FF0000] text-white absolute top-0 right-0 text-sm font-semibold flex items-center justify-center p-1.5 h-6 w-6 rounded-full dark:bg-blue-200 dark:text-blue-800">
-              {cartLength}
+            <span className="bg-red-600 text-white absolute -top-1 -right-1 text-sm font-semibold flex items-center justify-center h-6 w-6 rounded-full dark:bg-blue-200 dark:text-blue-800">
+              {Object.keys(store.cart)}
             </span>
           </div>
         </div>

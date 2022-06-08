@@ -3,3 +3,4 @@
 @tailwind utilities;
 
 @import url('navbar.css');
+@import url('product/product.css');

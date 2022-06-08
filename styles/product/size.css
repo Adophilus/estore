@@ -1,0 +1,5 @@
+/*@tailwind components;*/
+
+.product-full .product-size input[type='radio']:checked + label {
+  @apply bg-primary text-white;
+}
