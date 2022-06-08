@@ -1,8 +1,18 @@
 import SearchIcon from '../../icons/Search'
 import ShoppingCartIcon from '../../icons/ShoppingCart'
 import NavLink from './navbar/Link'
+import { useEffect } from 'react'
 
-export default () => {
+let cartLength = 0
+
+export default ({ store }) => {
+  useEffect(
+    function (change) {
+      cartLength = Object.keys(store.cart)
+    },
+    [store.cart]
+  )
+
   return (
     <header className="text-gray-600 body-font navbar">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -11,9 +21,9 @@ export default () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
             viewBox="0 0 24 24"
           >
@@ -26,7 +36,7 @@ export default () => {
           <NavLink to="/featured">Featured</NavLink>
           <NavLink to="/best-deals">Best Deals</NavLink>
         </nav>
-        <div class="flex gap-x-3">
+        <div className="flex gap-x-3">
           <div className="flex search-btn hover:gap-x-3 hover:cursor-pointer duration-200 items-center justify-center text-white bg-indigo-500 border-0 w-14 h-14 rounded-full">
             <SearchIcon className="w-6 h-6 search-icon" />
             <input
@@ -36,8 +46,8 @@ export default () => {
           </div>
           <div className="flex items-center relative hover:cursor-pointer justify-center text-white bg-indigo-500 border-0 w-14 h-14 hover:bg-indigo-600 rounded-full">
             <ShoppingCartIcon className="w-6 h-6" />
-            <span class="bg-[#FF0000] text-white absolute top-0 right-0 text-sm font-semibold flex items-center justify-center p-1.5 h-6 w-6 rounded-full dark:bg-blue-200 dark:text-blue-800">
-              4
+            <span className="bg-[#FF0000] text-white absolute top-0 right-0 text-sm font-semibold flex items-center justify-center p-1.5 h-6 w-6 rounded-full dark:bg-blue-200 dark:text-blue-800">
+              {cartLength}
             </span>
           </div>
         </div>

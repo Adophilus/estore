@@ -1,10 +1,10 @@
-// import Navbar from "./Navbar.tsx"
-// import Footer from "./Footer.tsx"
+import Navbar from './Navbar'
+import Footer from './Footer'
 
-export default ({ children }) => {
+export default ({ children, store }) => {
   return (
     <>
-      <Navbar />
+      <Navbar store={store} />
 
       <main>{children}</main>
 

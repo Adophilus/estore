@@ -1,16 +1,5 @@
-import Navbar from "./Navbar.tsx"
-import Footer from "./Footer.tsx"
+import MainLayout from '../main/Layout'
 
-export default ({ children }) => {
-	return (
-		<>
-			<Navbar />
-
-			<main>
-				{children}
-			</main>
-
-			<Footer />
-		</>
-	)
+export default ({ children, store }) => {
+  return <MainLayout store={store}>{children}</MainLayout>
 }

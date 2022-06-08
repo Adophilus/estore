@@ -1,7 +1,7 @@
 import Link from 'next/Link'
 import ShoppingCartIcon from './icons/ShoppingCart.tsx'
 
-export default ({ product }) => {
+export default ({ product, store }) => {
   const { name, price, slug, cover } = product
 
   return (
@@ -31,7 +31,15 @@ export default ({ product }) => {
         <p className="mt-1">${price}</p>
       </div>
       <div className="mt-4">
-        <button className="flex justify-center w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+        <button
+          onClick={function () {
+            store.cart[product.slug]
+              ? store.cart[product.slug]++
+              : (store.cart[product.slug] = 1)
+            console.log(store.cart)
+          }}
+          className="flex justify-center w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+        >
           <ShoppingCartIcon className="w-6 h-6" />
           Add to cart
         </button>
