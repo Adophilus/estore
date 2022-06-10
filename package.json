@@ -6,7 +6,7 @@
     "start": "next start",
     "lint": "yarn eslint .",
     "lint:fix": "eslint --fix",
-    "format:watch": "node format.js",
+    "format:watch": "node scripts/format.js",
     "format:prettier": "prettier --write"
   },
   "dependencies": {

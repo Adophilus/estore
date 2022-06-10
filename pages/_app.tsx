@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useState } from 'react'
+import Cart from '../utils/Cart.ts'
 
 function Store() {
   let [store, setStore] = useState({
@@ -16,7 +17,9 @@ function Store() {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const store = new Store()
-  return <Component store={store} {...pageProps} />
+  const cart = new Cart({ store })
+
+  return <Component store={store} cart={cart} {...pageProps} />
 }
 
 export default MyApp

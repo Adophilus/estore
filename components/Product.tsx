@@ -1,8 +1,8 @@
 import Link from 'next/Link'
 import ShoppingCartIcon from './icons/ShoppingCart.tsx'
 
-export default ({ product, store }) => {
-  const { name, price, slug, cover } = product
+export default ({ product, store, cart }) => {
+  const { name, price, slug, images } = product
 
   return (
     <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
@@ -12,7 +12,7 @@ export default ({ product, store }) => {
             <img
               alt="ecommerce"
               className="object-cover object-center w-full h-full block"
-              src={`/product-images/${cover[0]}`}
+              src={`/product-images/${images[0]}`}
             />
           </a>
         </Link>
@@ -32,13 +32,7 @@ export default ({ product, store }) => {
       </div>
       <div className="mt-4">
         <button
-          onClick={function () {
-            let newStore = { ...store.state }
-            newStore.cart[product.slug] = store.state.cart[product.slug]
-              ? store.state.cart[product.slug]++
-              : 1
-            store.set(newStore)
-          }}
+          onClick={() => cart.addItem({ product })}
           className="flex justify-center w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
         >
           <ShoppingCartIcon className="w-6 h-6" />
