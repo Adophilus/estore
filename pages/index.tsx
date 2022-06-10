@@ -3,9 +3,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import MainLayout from '../components/layouts/main/Layout'
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ store }) => {
   return (
-    <MainLayout>
+    <MainLayout store={store}>
       <div className="flex min-h-screen flex-col items-center justify-center py-2">
         <Head>
           <title>Estore</title>

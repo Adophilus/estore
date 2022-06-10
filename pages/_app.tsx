@@ -3,16 +3,14 @@ import type { AppProps } from 'next/app'
 import { useState } from 'react'
 
 function Store() {
-  let cart = {}
-  let user = {}
   let [store, setStore] = useState({
-    cart: this.cart,
+    cart: {},
     user: {}
   })
 
   return {
-    cart,
-    user
+    state: store,
+    set: setStore
   }
 }
 

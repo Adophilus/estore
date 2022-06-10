@@ -33,10 +33,11 @@ export default ({ product, store }) => {
       <div className="mt-4">
         <button
           onClick={function () {
-            store.cart[product.slug]
-              ? store.cart[product.slug]++
-              : (store.cart[product.slug] = 1)
-            console.log(store.cart)
+            let newStore = { ...store.state }
+            newStore.cart[product.slug] = store.state.cart[product.slug]
+              ? store.state.cart[product.slug]++
+              : 1
+            store.set(newStore)
           }}
           className="flex justify-center w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
         >
