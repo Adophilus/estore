@@ -4,7 +4,7 @@ export default ({ product }) => {
   return (
     <div className="flex gap-x-2">
       {product.colors.map((color, index) => (
-        <div key={index} className="product-color">
+        <div key={index} className="product-color drop-shadow-md w-20" bg-col={color}>
           <input
             type="radio"
             id={`productColor${index}`}
@@ -13,10 +13,10 @@ export default ({ product }) => {
           />
           <label
             htmlFor={`productColor${index}`}
-            className={`py-1 px-2 uppercase border-2 border-grey-300 rounded bg-[${color}] cursor-pointer duration-200`}
+            className={`w-full h-full py-2 flex justify-center items-center rounded cursor-pointer duration-200`}
           >
-            <span className="flex justify-center items-center rounded-full text-white bg-black">
-              <CheckIcon className="w-6 h-6" />
+            <span className="flex invisible rounded-full w-100 h-100 text-white bg-[#333333] ">
+              <CheckIcon className="w-6 h-6 text-bold" />
             </span>
           </label>
         </div>
