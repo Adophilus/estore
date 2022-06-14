@@ -5,7 +5,9 @@ import Cart from '../utils/Cart.ts'
 
 function Store() {
   let [store, setStore] = useState({
-    cart: {},
+    cart: {
+      'mens-tshirt-black': 1
+    },
     user: {}
   })
 

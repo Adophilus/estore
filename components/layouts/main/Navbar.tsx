@@ -1,6 +1,7 @@
 import SearchIcon from '../../icons/Search'
 import ShoppingCartIcon from '../../icons/ShoppingCart'
 import NavLink from './navbar/Link'
+import Link from 'next/link'
 
 export default ({ store }) => {
   return (
@@ -34,14 +35,16 @@ export default ({ store }) => {
               className="bg-transparent w-0 py-1 focus:outline-none border-b-2 border-b-white search-input"
             />
           </div>
-          <div className="flex items-center relative hover:cursor-pointer justify-center text-white bg-indigo-500 border-0 w-14 h-14 hover:bg-indigo-600 rounded-full">
-            <ShoppingCartIcon className="w-6 h-6" />
-            {Object.keys(store.state.cart).length > 0 ? (
-              <span className="bg-red-600 text-white absolute -top-1 -right-1 text-sm font-semibold flex items-center justify-center h-6 w-6 rounded-full dark:bg-blue-200 dark:text-blue-800">
-                {Object.keys(store.state.cart).length}
-              </span>
-            ) : null}
-          </div>
+          <Link href="/cart">
+            <a className="flex items-center relative hover:cursor-pointer justify-center text-white bg-indigo-500 border-0 w-14 h-14 hover:bg-indigo-600 rounded-full">
+              <ShoppingCartIcon className="w-6 h-6" />
+              {Object.keys(store.state.cart).length > 0 ? (
+                <span className="bg-red-600 text-white absolute -top-1 -right-1 text-sm font-semibold flex items-center justify-center h-6 w-6 rounded-full dark:bg-blue-200 dark:text-blue-800">
+                  {Object.keys(store.state.cart).length}
+                </span>
+              ) : null}
+            </a>
+          </Link>
         </div>
       </div>
     </header>

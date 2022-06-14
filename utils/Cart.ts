@@ -7,5 +7,9 @@ export default function ({ store }) {
     store.set(newStore)
   }
 
+  this.getItems = () => {
+    return { ...store.state.cart }
+  }
+
   return this
 }

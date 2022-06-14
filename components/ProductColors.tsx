@@ -4,7 +4,11 @@ export default ({ product }) => {
   return (
     <div className="flex gap-x-2">
       {product.colors.map((color, index) => (
-        <div key={index} className="product-color drop-shadow-md w-20" bg-col={color}>
+        <div
+          key={index}
+          className="product-color drop-shadow-md w-20"
+          bg-col={color}
+        >
           <input
             type="radio"
             id={`productColor${index}`}
