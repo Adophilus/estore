@@ -2,7 +2,7 @@ import PlusIcon from '../icons/Plus'
 import MinusIcon from '../icons/Minus'
 import TrashIcon from '../icons/Trash'
 
-export default ({ product, store }) => {
+export default ({ product, store, cart }) => {
   return (
     <div className="flex gap-x-5">
       <img className="w-1/4" src={`/product-images/${product.images[0]}`} />
@@ -17,7 +17,7 @@ export default ({ product, store }) => {
         </div>
         <div className="flex mt-auto justify-between">
           <div>
-            <button className="flex justify-center w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-primaryHover rounded">
+            <button onClick={() => cart.removeItem(product)} className="flex justify-center w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-primaryHover rounded">
               <TrashIcon className="w-6 h-6" />
               Remove
             </button>
