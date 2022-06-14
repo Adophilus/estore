@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import StoreLayout from '../../components/layouts/store/Layout'
 import ShoppingCartIcon from '../../components/icons/ShoppingCart'
-import ProductColors from '../../components/ProductColors'
-import ProductSizes from '../../components/ProductSizes'
+import ProductColors from '../../components/product/Colors'
+import ProductSizes from '../../components/product/Sizes'
 import db from '../../database.json'
 import { useRouter } from 'next/router'
 

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import db from '../database.json'
 import StoreLayout from '../components/layouts/store/Layout'
-import Product from '../components/Product'
+import Product from '../components/product/Product'
 
 export default ({ store, cart }) => {
   return (

@@ -8,6 +8,8 @@ export default ({ product }) => {
             id={`productSize${index}`}
             name="product_size"
             className="hidden"
+            defaultChecked={index === 0}
+            value={size}
           />
           <label
             htmlFor={`productSize${index}`}

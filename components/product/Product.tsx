@@ -1,5 +1,5 @@
 import Link from 'next/Link'
-import ShoppingCartIcon from './icons/ShoppingCart.tsx'
+import ShoppingCartIcon from '../icons/ShoppingCart'
 
 export default ({ product, store, cart }) => {
   const { name, price, slug, images } = product
