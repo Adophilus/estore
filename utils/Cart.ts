@@ -1,9 +1,12 @@
 export default function ({ store }) {
-  this.addItem = ({ product }) => {
+  this.addItem = ({ product, color, size }) => {
     let newStore = { ...store.state }
-    newStore.cart[product.slug] = store.state.cart[product.slug]
-      ? store.state.cart[product.slug]++
-      : 1
+    if (!newStore.cart[product.slug]) newStore.cart[product.slug] = []
+    let variant = newStore.cart[product.slug]?.find(
+      (_variant) => _variant.color === color && _variant.size === size
+    )
+    if (variant) variant.qty += 1
+    else newStore.cart[product.slug].push({ color, size, qty: 0 })
     store.set(newStore)
   }
 

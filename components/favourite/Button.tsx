@@ -2,11 +2,7 @@ import { Heart, HeartSolid } from '../icons/Heart'
 
 export default ({ product, favourites }) => {
   let className =
-    'rounded-full w-10 h-10 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4'
-
-  if (favourites.check(product))
-    className = `${className} bg-primary text-white`
-  else className = `${className} bg-gray-200`
+    'rounded-full w-10 h-10 p-0 border-0 inline-flex items-center justify-center ml-4 bg-primary text-white'
 
   return (
     <button
