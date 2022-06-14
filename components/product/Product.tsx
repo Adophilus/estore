@@ -1,7 +1,8 @@
 import Link from 'next/Link'
 import ShoppingCartIcon from '../icons/ShoppingCart'
+import FavouriteButton from '../favourite/Button'
 
-export default ({ product, store, cart }) => {
+export default ({ product, store, cart, favourites }) => {
   const { name, price, slug, images } = product
 
   return (
@@ -30,14 +31,15 @@ export default ({ product, store, cart }) => {
         </Link>
         <p className="mt-1">${price}</p>
       </div>
-      <div className="mt-4">
+      <div className="mt-4 flex">
         <button
           onClick={() => cart.addItem({ product })}
-          className="flex justify-center w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+          className="flex flex-grow justify-center text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primaryHover rounded"
         >
           <ShoppingCartIcon className="w-6 h-6" />
           Add to cart
         </button>
+        <FavouriteButton product={product} favourites={favourites} />
       </div>
     </div>
   )

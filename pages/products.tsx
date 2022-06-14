@@ -3,7 +3,7 @@ import db from '../database.json'
 import StoreLayout from '../components/layouts/store/Layout'
 import Product from '../components/product/Product'
 
-export default ({ store, cart }) => {
+export default ({ store, cart, favourites }) => {
   return (
     <StoreLayout store={store}>
       <section className="text-gray-600 body-font">
@@ -15,6 +15,7 @@ export default ({ store, cart }) => {
                 product={product}
                 store={store}
                 cart={cart}
+                favourites={favourites}
               />
             ))}
           </div>

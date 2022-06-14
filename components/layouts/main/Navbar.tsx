@@ -36,7 +36,7 @@ export default ({ store }) => {
             />
           </div>
           <Link href="/cart">
-            <a className="flex items-center relative hover:cursor-pointer justify-center text-white bg-indigo-500 border-0 w-14 h-14 hover:bg-indigo-600 rounded-full">
+            <a className="flex items-center relative hover:cursor-pointer justify-center text-white bg-indigo-500 border-0 w-14 h-14 hover:bg-primaryHover rounded-full">
               <ShoppingCartIcon className="w-6 h-6" />
               {Object.keys(store.state.cart).length > 0 ? (
                 <span className="bg-red-600 text-white absolute -top-1 -right-1 text-sm font-semibold flex items-center justify-center h-6 w-6 rounded-full dark:bg-blue-200 dark:text-blue-800">

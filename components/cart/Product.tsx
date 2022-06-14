@@ -17,19 +17,19 @@ export default ({ product, store }) => {
         </div>
         <div className="flex mt-auto justify-between">
           <div>
-            <button className="flex justify-center w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+            <button className="flex justify-center w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-primaryHover rounded">
               <TrashIcon className="w-6 h-6" />
               Remove
             </button>
           </div>
           <div className="flex gap-x-6 items-center">
-            <button className="flex justify-center w-full text-white bg-indigo-500 border-0 hover:bg-indigo-600 rounded shadow-md py-1 px-1">
+            <button className="flex justify-center w-full text-white bg-indigo-500 border-0 hover:bg-primaryHover rounded shadow-md py-1 px-1">
               <MinusIcon className="w-6 h-6" />
             </button>
             <span className="text-xl">
               {Object.keys(store.state.cart).length}
             </span>
-            <button className="flex justify-center w-full text-white bg-indigo-500 border-0 hover:bg-indigo-600 rounded shadow-md py-1 px-1">
+            <button className="flex justify-center w-full text-white bg-indigo-500 border-0 hover:bg-primaryHover rounded shadow-md py-1 px-1">
               <PlusIcon className="w-6 h-6" />
             </button>
           </div>

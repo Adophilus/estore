@@ -11,7 +11,10 @@ export default ({ product }) => {
       {product.colors.map((color, index) => (
         <div
           key={index}
-          className={`product-color drop-shadow-md w-20 bg-[#0d0d0d]`}
+          style={{
+            backgroundColor: color
+          }}
+          className="product-color drop-shadow-md w-20"
         >
           <input
             type="radio"
