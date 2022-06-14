@@ -20,5 +20,13 @@ export default function ({ store }) {
     return { ...store.state.cart }
   }
 
+  this.hasItem = ({ product, color, size }) => {
+    if (!store.state.cart[product.slug]) return false
+
+    return store.state.cart[product.slug]?.find(
+      (_variant) => _variant.color === color && _variant.size === size
+    )
+  }
+
   return this
 }
