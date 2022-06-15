@@ -16,7 +16,15 @@ export default function ({ store }) {
     let item = newStore.cart[product.slug]?.find(
       (_variant) => _variant.color === color && _variant.size === size
     )
-    item ? item.qty > 1 ? item.qty -= 1 : newStore.cart[product.slug].find((_variant, index) => _variant.color === item.color && _variant.size === item.size ? newStore.cart[product.slug].splice(index, 1) : null) : null
+    item
+      ? item.qty > 1
+        ? (item.qty -= 1)
+        : newStore.cart[product.slug].find((_variant, index) =>
+            _variant.color === item.color && _variant.size === item.size
+              ? newStore.cart[product.slug].splice(index, 1)
+              : null
+          )
+      : null
     store.set(newStore)
   }
 
@@ -39,7 +47,9 @@ export default function ({ store }) {
   }
 
   this.numberOfProducts = ({ product, color, size }) => {
-    return store.state.cart[product.slug]?.find(_variant => _variant.color === color && _variant.size === size)?.qty
+    return store.state.cart[product.slug]?.find(
+      (_variant) => _variant.color === color && _variant.size === size
+    )?.qty
   }
 
   return this
