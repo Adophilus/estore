@@ -1,1 +1,3 @@
-export default ({ cart }) => {}
+export default ({ cart }) => {
+  console.log(cart.totalPrice())
+}

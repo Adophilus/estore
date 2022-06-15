@@ -1,3 +1,5 @@
+import db from '../database.json'
+
 export default function ({ store }) {
   this.addItem = ({ product, color, size }) => {
     let newStore = { ...store.state }
@@ -50,6 +52,21 @@ export default function ({ store }) {
     return store.state.cart[product.slug]?.find(
       (_variant) => _variant.color === color && _variant.size === size
     )?.qty
+  }
+
+  this.totalPrice = () => {
+    const cartItems = this.getItems()
+    return Object.keys(cartItems)
+      .map((_cartProduct) => {
+        const productPrice = db.products.find(
+          (_product) => _product.slug === _cartProduct
+        ).price
+        const productQty = cartItems[_cartProduct]
+          .map((_variant) => _variant.qty)
+          .reduce((_prev, _next) => _next + _prev)
+        return productQty * productPrice
+      })
+      .reduce((_prev, _next) => _prev + _next)
   }
 
   return this

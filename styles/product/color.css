@@ -1,7 +1,7 @@
-.product-full .product-color input[type='radio']:checked + label span {
+.product-color input[type='radio']:checked + label span {
   visibility: visible;
 }
 
-.product-full .product-color {
+.product-color {
   background-color: attr(bg-color);
 }
