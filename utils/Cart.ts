@@ -6,11 +6,21 @@ export default function ({ store }) {
       (_variant) => _variant.color === color && _variant.size === size
     )
     if (variant) variant.qty += 1
-    else newStore.cart[product.slug].push({ color, size, qty: 0 })
+    else newStore.cart[product.slug].push({ color, size, qty: 1 })
     store.set(newStore)
   }
 
-  this.removeItem = (product) => {
+  this.removeItem = ({ product, color, size }) => {
+    let newStore = { ...store.state }
+    if (!newStore.cart[product.slug]) return
+    let item = newStore.cart[product.slug]?.find(
+      (_variant) => _variant.color === color && _variant.size === size
+    )
+    item ? item.qty > 1 ? item.qty -= 1 : newStore.cart[product.slug].find((_variant, index) => _variant.color === item.color && _variant.size === item.size ? newStore.cart[product.slug].splice(index, 1) : null) : null
+    store.set(newStore)
+  }
+
+  this.deleteItem = ({ product, color, size }) => {
     let newStore = { ...store.state }
     delete newStore.cart[product.slug]
     store.set(newStore)
@@ -26,6 +36,10 @@ export default function ({ store }) {
     return store.state.cart[product.slug]?.find(
       (_variant) => _variant.color === color && _variant.size === size
     )
+  }
+
+  this.numberOfProducts = ({ product, color, size }) => {
+    return store.state.cart[product.slug]?.find(_variant => _variant.color === color && _variant.size === size)?.qty
   }
 
   return this

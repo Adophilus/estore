@@ -1,4 +1,4 @@
-export default ({ product }) => {
+export default ({ product, setSize }) => {
   return (
     <div className="flex gap-x-2">
       {product.sizes.map((size, index) => (
@@ -10,6 +10,7 @@ export default ({ product }) => {
             className="hidden"
             defaultChecked={index === 0}
             value={size}
+            onChange={(event) => setSize(event.target.value)}
           />
           <label
             htmlFor={`productSize${index}`}

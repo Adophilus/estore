@@ -3,12 +3,15 @@ import StoreLayout from '../../components/layouts/store/Layout'
 import ShoppingCartIcon from '../../components/icons/ShoppingCart'
 import ProductColors from '../../components/product/Colors'
 import ProductSizes from '../../components/product/Sizes'
+import AddToCartButton from '../../components/cart/AddButton'
 import FavouriteButton from '../../components/favourite/Button'
 import db from '../../database.json'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 export default ({ store, cart, favourites }) => {
   const router = useRouter()
+
   let product = null
 
   product = db.products.find((product) => product.slug === router.query.slug)
@@ -26,6 +29,9 @@ export default ({ store, cart, favourites }) => {
         <h2 className="text-3xl font-bold">Product not found!</h2>
       </div>
     )
+
+  const [color, setColor] = useState(product.colors[0])
+  const [size, setSize] = useState(product.sizes[0])
 
   return (
     <StoreLayout store={store}>
@@ -136,20 +142,21 @@ export default ({ store, cart, favourites }) => {
               </div>
               <p className="leading-relaxed">{product.description}</p>
               <div className="mt-6 flex flex-col gap-y-4 pb-5 border-b-2 border-gray-100 mb-5">
-                <ProductColors product={product} />
-                <ProductSizes product={product} />
+                <ProductColors setColor={setColor} product={product} />
+                <ProductSizes setSize={setSize} product={product} />
               </div>
               <div className="flex">
-                <span className="title-font font-medium text-2xl text-gray-900">
+                <span className="title-font font-medium text-2xl text-gray-900 self-center">
                   ${product.price}
                 </span>
-                <button
-                  onClick={() => cart.addItem({ product })}
-                  className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-primaryHover rounded"
-                >
-                  <ShoppingCartIcon className="w-6 h-6" />
-                  Add to cart
-                </button>
+                <div className="ml-auto">
+                  <AddToCartButton
+                    cart={cart}
+                    product={product}
+                    color={color}
+                    size={size}
+                  />
+                </div>
                 <FavouriteButton favourites={favourites} product={product} />
               </div>
             </div>

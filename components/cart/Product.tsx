@@ -27,7 +27,7 @@ export default ({ product, store, cart }) => {
               <MinusIcon className="w-6 h-6" />
             </button>
             <span className="text-xl">
-              {Object.keys(store.state.cart).length}
+              {cart.numberOfProducts({ product, color, size})}
             </span>
             <button className="flex justify-center w-full text-white bg-indigo-500 border-0 hover:bg-primaryHover rounded shadow-md py-1 px-1">
               <PlusIcon className="w-6 h-6" />

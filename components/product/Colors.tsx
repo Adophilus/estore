@@ -1,11 +1,6 @@
 import CheckIcon from '../icons/Check'
 
-export default ({ product }) => {
-  const handleChange = (event) => {
-    console.log(event.target)
-    console.log(event.target.value)
-  }
-
+export default ({ setColor, product }) => {
   return (
     <div className="flex gap-x-2">
       {product.colors.map((color, index) => (
@@ -23,6 +18,7 @@ export default ({ product }) => {
             className="hidden"
             defaultChecked={index === 0}
             value={color}
+            onChange={(event) => setColor(event.target.value)}
           />
           <label
             htmlFor={`productColor${index}`}
