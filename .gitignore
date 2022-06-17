@@ -39,3 +39,5 @@ yarn-error.log*
 
 database.json
 public/products
+
+db
