@@ -1,6 +1,17 @@
-import db from '../database.json'
+// import db from '../database.json'
 
 export default function ({ store }) {
+  this.create = async () => {
+    const res = await fetch('/api/cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    return res.ok
+  }
+
   this.addItem = ({ product, color, size }) => {
     let newStore = { ...store.state }
     if (!newStore.cart[product.slug]) newStore.cart[product.slug] = []

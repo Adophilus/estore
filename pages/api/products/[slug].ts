@@ -1,22 +1,13 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import db from '../../../database.json'
+import { Product } from '../../../utils/Models'
 
-type Data = {
-  name: string
-  cover: string
-  images: ['tshirtblack-1.png', 'tshirtblack-2.png', 'tshirtblack-3.png']
-  description: string
-}
-
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+export default async (req, res) => {
   switch (req.method) {
     case 'GET':
-      res
-        .status(200)
-        .json(db.products.find((product) => product.slug === req.query.slug))
+      const product = await Product.findOne({ slug: req.query.slug })
+
+      if (product) res.status(200).json(product.toJSON())
+      else res.status(404).json({})
+
       break
     default:
       res.status(405).end()

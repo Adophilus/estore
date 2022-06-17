@@ -5,16 +5,36 @@ import ProductColors from '../../components/product/Colors'
 import ProductSizes from '../../components/product/Sizes'
 import AddToCartButton from '../../components/cart/AddButton'
 import FavouriteButton from '../../components/favourite/Button'
-import db from '../../database.json'
+// import db from '../../database.json'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { useState } from 'react'
 
 export default ({ store, cart, favourites }) => {
   const router = useRouter()
+  const { slug } = router.query
+  const [product, setProduct] = useState(null)
+  const [color, setColor] = useState(null)
+  const [size, setSize] = useState(null)
 
-  let product = null
+  useEffect(() => {
+    ;(async () => {
+      const response = await fetch(`/api/products/${slug}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
 
-  product = db.products.find((product) => product.slug === router.query.slug)
+      if (!response.ok) {
+        console.warn(`Error: ${response.status}`)
+        setProduct(undefined)
+        return
+      }
+
+      setProduct(await response.json())
+    })()
+  }, [slug])
 
   if (product === null)
     return (
@@ -30,8 +50,8 @@ export default ({ store, cart, favourites }) => {
       </div>
     )
 
-  const [color, setColor] = useState(product.colors[0])
-  const [size, setSize] = useState(product.sizes[0])
+  if (!color) setColor(product.colors[0])
+  if (!size) setSize(product.sizes[0])
 
   return (
     <StoreLayout store={store}>
