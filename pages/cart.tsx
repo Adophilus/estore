@@ -7,32 +7,33 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 
 export default ({ store, cart }) => {
-  const cartItems = cart.getItems()
+  const [cartItems, setCartItems] = useState({})
   const [products, setProducts] = useState([])
-  const [p, setP] = useState()
 
   useEffect(() => {
-    Object.keys(cartItems).forEach(async (cartProductSlug) => {
-      const response = await fetch(`/api/products/${cartProductSlug}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
+    cart.fetchItems().then(async (items) => {
+      setCartItems(items)
+      const slugs = Object.keys(items)
+      let p = []
+      for (let i = 0; i < slugs.length; i++) {
+        const res = await fetch(`/api/products/${slugs[i]}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+
+        if (!res.ok) {
+          console.warn(`Error: ${res.status}`)
+          return
         }
-      })
 
-      if (!response.ok) {
-        console.warn(`Error: ${response.status}`)
-        return
+        const newProduct = await res.json()
+        p.push(newProduct)
       }
-
-      setP(await response.json())
-      // setProducts([...products, await response.json()])
+      setProducts(p)
     })
   }, [])
-
-  useEffect(() => {
-    if (p) setProducts([...products, p])
-  }, [p])
 
   return (
     <MainLayout store={store} cart={cart}>
@@ -46,6 +47,7 @@ export default ({ store, cart }) => {
                   cart={cart}
                   store={store}
                   product={_product}
+                  onRemoved={() => cartItems[_product.slug].splice(index, 1)}
                   color={_variant.color}
                   size={_variant.size}
                   qty={_variant.qty}

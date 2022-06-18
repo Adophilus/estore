@@ -19,20 +19,20 @@ export default ({ store, cart, favourites }) => {
 
   useEffect(() => {
     ;(async () => {
-      const response = await fetch(`/api/products/${slug}`, {
+      const res = await fetch(`/api/products/${slug}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
       })
 
-      if (!response.ok) {
-        console.warn(`Error: ${response.status}`)
+      if (!res.ok) {
+        console.warn(`Error: ${res.status}`)
         setProduct(undefined)
         return
       }
 
-      setProduct(await response.json())
+      setProduct(await res.json())
     })()
   }, [slug])
 

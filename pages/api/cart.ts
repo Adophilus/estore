@@ -1,18 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { Cart } from '../../utils/Models'
 
-export default async function (
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+export default async function (req, res) {
   switch (req.method) {
-    case 'GET':
-      res.status(405).end()
-      break
     case 'POST':
       const cart = new Cart()
-      cart.save()
-      res.status(200).end()
+      res.status(200).json((await cart.save()).toJSON())
       break
     default:
       res.status(405).end()

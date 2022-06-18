@@ -4,7 +4,7 @@ import MinusIcon from '../icons/Minus'
 import TrashIcon from '../icons/Trash'
 import AddToCartButton from './AddButton'
 
-export default ({ product, color, size, qty, store, cart }) => {
+export default ({ product, color, size, qty, store, cart, onRemoved }) => {
   return (
     <div className="flex gap-x-5">
       <img className="w-1/4" src={`/product-images/${product.images[0]}`} />
@@ -55,19 +55,23 @@ export default ({ product, color, size, qty, store, cart }) => {
         <div className="flex mt-auto justify-between">
           <div>
             <button
-              onClick={() => cart.deleteItem({ product, color, size })}
+              onClick={() =>
+                cart.deleteItem({ product, color, size }) && onRemoved()
+              }
               className="flex justify-center w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-primaryHover rounded"
             >
               <TrashIcon className="w-6 h-6" />
               Remove
             </button>
           </div>
-          <AddToCartButton
-            cart={cart}
-            product={product}
-            color={color}
-            size={size}
-          />
+          <div className="ml-auto">
+            <AddToCartButton
+              cart={cart}
+              product={product}
+              color={color}
+              size={size}
+            />
+          </div>
         </div>
       </div>
       <div className="flex items-center justify-center">

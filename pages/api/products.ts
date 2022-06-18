@@ -1,10 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { Product } from '../../utils/Models'
 
-export default async function (
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+export default async function (req, res) {
   switch (req.method) {
     case 'GET':
       res

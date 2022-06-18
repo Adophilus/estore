@@ -8,18 +8,18 @@ export default ({ store, cart, favourites }) => {
   const [products, setProducts] = useState([])
 
   ;(async () => {
-    const response = await fetch('/api/products', {
+    const res = await fetch('/api/products', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     })
 
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`)
+    if (!res.ok) {
+      throw new Error(`Error: ${res.status}`)
     }
 
-    setProducts(await response.json())
+    setProducts(await res.json())
   })()
 
   return (
