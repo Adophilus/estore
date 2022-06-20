@@ -1,5 +1,3 @@
-// import db from '../database.json'
-
 export default function ({ store }) {
   const create = async () => {
     const res = await fetch('/api/cart', {
@@ -170,6 +168,35 @@ export default function ({ store }) {
         })
       ))
     ].reduce((_prev, _next) => _prev + _next)
+  }
+
+  this.checkout = async () => {
+    const checkoutSession = await fetch(`/api/cart/${this.id}/checkout`)
+    if (!checkoutSession.ok) {
+      return
+    }
+
+    if (typeof window !== 'undefined')
+      window.open((await checkoutSession.json()).url, '_blank')
+  }
+
+  this.empty = async () => {
+    if (!(await check())) return
+
+    let newStore = { ...store.state }
+    newStore.cart = {}
+
+    const res = await fetch(`/api/cart/${this.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ op: '{}' })
+    })
+
+    if (res.ok) {
+      store.set(newStore)
+    }
   }
 
   init()

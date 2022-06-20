@@ -22,9 +22,13 @@ export default async function (req, res) {
 
     if (req.body.op === '+') {
       cart.addItem({ product, color, size })
-    } else {
+    } else if (req.body.op === '-') {
       cart.removeItem({ product, color, size })
+    } else if (req.body.op === '{}') {
+      cart.empty()
     }
+
+    console.log(cart)
     cart.markModified('items')
 
     await cart.save()

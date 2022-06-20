@@ -1,8 +1,7 @@
 import MainLayout from '../components/layouts/main/Layout'
 import CartProduct from '../components/cart/Product'
-import CheckoutIcon from '../components/icons/Checkout'
+import CheckoutButton from '../components/cart/CheckoutButton'
 import Link from 'next/link'
-// import db from '../database.json'
 import { useEffect } from 'react'
 import { useState } from 'react'
 
@@ -56,12 +55,7 @@ export default ({ store, cart }) => {
             })}
           </div>
           <div className="flex justify-end mt-6 divide-y-2 divide-gray-100">
-            <Link href="/cart/checkout">
-              <button className="flex gap-x-2 uppercase text-white bg-indigo-500 border-0 hover:bg-primaryHover rounded shadow-md font-medium py-3 px-3">
-                <CheckoutIcon className="w-6 h-6" />
-                Checkout
-              </button>
-            </Link>
+            <CheckoutButton cart={cart} />
           </div>
         </div>
       </section>

@@ -38,6 +38,10 @@ Cart.methods.deleteItem = function ({ product, color, size }) {
   delete this.items[product]
 }
 
+Cart.methods.empty = function () {
+  this.items = {}
+}
+
 let model
 if (mongoose.models['Cart']) model = mongoose.model('Cart')
 else model = mongoose.model('Cart', Cart)
