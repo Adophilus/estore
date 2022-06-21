@@ -19,7 +19,8 @@ export default ({ store, cart, favourites }) => {
       throw new Error(`Error: ${res.status}`)
     }
 
-    setProducts(await res.json())
+    const products = await res.json()
+    setProducts(products)
   })()
 
   return (

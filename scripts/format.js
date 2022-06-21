@@ -9,7 +9,7 @@ const prettify = (event, filePath) => {
     for (let extension of extensions) {
       if (filePath.endsWith(extension) && event === 'update') {
         console.log(`prettifying ${filePath}`)
-        exec(`yarn format:prettier "${path.join(process.cwd(), filePath)}"`)
+        exec(`pnpm format:prettier "${path.join(process.cwd(), filePath)}"`)
       }
     }
   }
