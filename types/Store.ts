@@ -1,12 +1,12 @@
 import { Cart } from './Cart'
 import { ProductVariant } from './Product'
 
-type Store = {
+export type Store = {
   state: {
-    cart: Object<string, ProductVariant>
+    cart: {
+      [key: string]: ProductVariant
+    }
     favourites: Array<string>
     user: Object
   }
 }
-
-export { Store }

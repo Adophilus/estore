@@ -1,15 +1,19 @@
-import { Product, ProductDetails } from './Product'
+import { Product, ProductDetails, ProductVariant } from './Product'
 
-type Cart = {
-  create: Promise<Boolean>
-  check: Promise<Array<Product>>
-  fetchItems: Promise<Array<Product>>
-  checkout: () => null
-  addItem: (ProductDetails) => null
-  numberOfProducts: (ProductDetails) => Number
-  hasItem: (ProductDetails) => Boolean
-  removeItem: (ProductDetails) => null
-  deleteItem: (ProductDetails) => null
+export type Cart = {
+  id: null | string
+  create?: () => Promise<Boolean>
+  empty?: () => Promise<void>
+  fetchItems?: () => Promise<ProductVariant[]>
+  check?: () => Promise<ProductVariant[]>
+  checkout?: () => Promise<void>
+  numberOfProducts?: (productDetails: ProductDetails) => number
+  totalPrice?: () => Promise<number>
+  addItem?: (productDetails: ProductDetails) => Promise<void>
+  hasItem?: (productDetails: ProductDetails) => boolean
+  getItems?: () => {
+    [key: string]: ProductVariant[]
+  }
+  removeItem?: (productDetails: ProductDetails) => Promise<void>
+  deleteItem?: (productDetails: ProductDetails) => Promise<void>
 }
-
-export { Cart }

@@ -1,7 +1,7 @@
 import { Product } from '../../types/Product'
 
 type Props = {
-  setSize: (size: string) => null
+  setSize: any //(size: string) => null
   product: Product
 }
 

@@ -1,6 +1,9 @@
-import { Product, ProductDetails } from '../types/Product'
+import { Product, ProductDetails, ProductVariant } from '../types/Product'
+import { Cart } from '../types/Cart'
 
 export default function ({ store }) {
+  let self: Cart = { id: null }
+
   const create = async () => {
     const res = await fetch('/api/cart', {
       method: 'POST',
@@ -10,27 +13,27 @@ export default function ({ store }) {
     })
 
     if (res.ok) {
-      this.id = (await res.json())._id
-      localStorage.setItem('cart', this.id)
+      self.id = (await res.json())._id
+      localStorage.setItem('cart', self.id)
     }
 
     return res.ok
   }
 
-  const check = (): Array<Product> => {
+  const check = () => {
     if (typeof window === 'undefined') return
-    if (!this.id) {
-      this.id = localStorage.getItem('cart')
+    if (!self.id) {
+      self.id = localStorage.getItem('cart')
     }
-    return this.fetchItems()
+    return self.fetchItems()
   }
 
   const init = async () => {
     await check()
   }
 
-  this.fetchItems = async (): Array<Product> => {
-    const res = await fetch(`/api/cart/${this.id}`, {
+  self.fetchItems = async () => {
+    const res = await fetch(`/api/cart/${self.id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -48,7 +51,7 @@ export default function ({ store }) {
     }
   }
 
-  this.addItem = async ({ product, color, size }: ProductDetails) => {
+  self.addItem = async ({ product, color, size }: ProductDetails) => {
     if (!(await check())) return
 
     let newStore = { ...store.state }
@@ -59,7 +62,7 @@ export default function ({ store }) {
     if (variant) variant.qty += 1
     else newStore.cart[product.slug].push({ color, size, qty: 1 })
 
-    const res = await fetch(`/api/cart/${this.id}`, {
+    const res = await fetch(`/api/cart/${self.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -72,7 +75,7 @@ export default function ({ store }) {
     }
   }
 
-  this.removeItem = async ({ product, color, size }: ProductDetails) => {
+  self.removeItem = async ({ product, color, size }: ProductDetails) => {
     if (!(await check())) return
 
     let newStore = { ...store.state }
@@ -92,7 +95,7 @@ export default function ({ store }) {
         : null
       : null
 
-    const res = await fetch(`/api/cart/${this.id}`, {
+    const res = await fetch(`/api/cart/${self.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -105,13 +108,13 @@ export default function ({ store }) {
     }
   }
 
-  this.deleteItem = async ({ product, color, size }: ProductDetails) => {
+  self.deleteItem = async ({ product, color, size }: ProductDetails) => {
     if (!(await check())) return
 
     let newStore = { ...store.state }
     delete newStore.cart[product.slug]
 
-    const res = await fetch(`/api/cart/${this.id}`, {
+    const res = await fetch(`/api/cart/${self.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -124,11 +127,11 @@ export default function ({ store }) {
     }
   }
 
-  this.getItems = () => {
+  self.getItems = () => {
     return { ...store.state.cart }
   }
 
-  this.hasItem = ({ product, color, size }: ProductDetails) => {
+  self.hasItem = ({ product, color, size }: ProductDetails) => {
     if (!store.state.cart[product.slug]) return false
 
     return store.state.cart[product.slug]?.find(
@@ -136,16 +139,16 @@ export default function ({ store }) {
     )
   }
 
-  this.numberOfProducts = ({ product, color, size }: ProductDetails) => {
+  self.numberOfProducts = ({ product, color, size }: ProductDetails) => {
     return store.state.cart[product.slug]?.find(
       (_variant) => _variant.color === color && _variant.size === size
     )?.qty
   }
 
-  this.totalPrice = async () => {
+  self.totalPrice = async () => {
     if (!(await check())) return
 
-    const cartItems = this.getItems()
+    const cartItems = self.getItems()
     return [
       0,
       ...(await Promise.all(
@@ -172,8 +175,8 @@ export default function ({ store }) {
     ].reduce((_prev, _next) => _prev + _next)
   }
 
-  this.checkout = async () => {
-    const checkoutSession = await fetch(`/api/cart/${this.id}/checkout`)
+  self.checkout = async () => {
+    const checkoutSession = await fetch(`/api/cart/${self.id}/checkout`)
     if (!checkoutSession.ok) {
       return
     }
@@ -182,13 +185,13 @@ export default function ({ store }) {
       window.open((await checkoutSession.json()).url, '_blank')
   }
 
-  this.empty = async () => {
+  self.empty = async () => {
     if (!(await check())) return
 
     let newStore = { ...store.state }
     newStore.cart = {}
 
-    const res = await fetch(`/api/cart/${this.id}`, {
+    const res = await fetch(`/api/cart/${self.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -203,5 +206,5 @@ export default function ({ store }) {
 
   init()
 
-  return this
+  return self
 }

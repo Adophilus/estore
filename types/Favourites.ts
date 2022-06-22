@@ -1,8 +1,8 @@
-type Favourites = {
-  add: (Product) => null
-  get: () => null
-  check: (Product) => null
-  remove: (Product) => null
-}
+import { Product } from './Product'
 
-export { Favourites }
+export type Favourites = {
+  add?: (product: Product) => void
+  get?: () => null
+  check?: (product: Product) => boolean
+  remove?: (product: Product) => void
+}

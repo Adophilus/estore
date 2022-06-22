@@ -2,8 +2,9 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import MainLayout from '../components/layouts/main/Layout'
+import { Store } from '../types/Store'
 
-const Home: NextPage = ({ store }) => {
+const Home: NextPage = ({ store }: { store: Store }) => {
   return (
     <MainLayout store={store}>
       <div className="flex min-h-screen flex-col items-center justify-center py-2">

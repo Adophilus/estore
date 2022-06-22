@@ -2,7 +2,7 @@ import CheckIcon from '../icons/Check'
 import { Product } from '../../types/Product'
 
 type Props = {
-  setColor: (color: string) => null
+  setColor: any //(color: string) => null
   product: Product
 }
 

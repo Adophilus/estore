@@ -1,4 +1,4 @@
-type Product = {
+export type Product = {
   slug: string
   name: string
   description: string
@@ -8,16 +8,14 @@ type Product = {
   price: number
 }
 
-type ProductDetails = {
+export type ProductDetails = {
   product: Product
   color: string
   size: string
 }
 
-type ProductVariant = {
+export type ProductVariant = {
   color: string
   size: string
   qty: number
 }
-
-export { Product, ProductDetails, ProductVariant }

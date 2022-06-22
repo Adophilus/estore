@@ -7,6 +7,14 @@ type ProductDetails = {
   size: string
 }
 
+type Model = {
+  save?: Promise<null>
+  addItem?: (details: ProductDetails) => null
+  removeItem?: (details: ProductDetails) => null
+  deleteItem?: (details: ProductDetails) => null
+  empty?: () => null
+}
+
 const Cart = new mongoose.Schema({
   items: {
     type: Object,
@@ -52,7 +60,7 @@ Cart.methods.empty = function () {
 }
 
 let model
-if (mongoose.models['Cart']) model = mongoose.model('Cart')
-else model = mongoose.model('Cart', Cart)
+if (mongoose.models['Cart']) model = mongoose.model<Model>('Cart')
+else model = mongoose.model<Model>('Cart', Cart)
 
 export default model

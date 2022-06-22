@@ -3,7 +3,8 @@ import mongoose from 'mongoose'
 import Stripe from 'stripe'
 import config from '../../../../config/config'
 
-const stripe = Stripe(config.stripe.secretKey)
+const SStripe: any = Stripe.Stripe
+const stripe = SStripe(config.stripe.secretKey)
 
 export default async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.query.id))
