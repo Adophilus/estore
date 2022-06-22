@@ -1,4 +1,11 @@
-export default ({ product, setSize }) => {
+import { Product } from '../../types/Product'
+
+type Props = {
+  setSize: (size: string) => null
+  product: Product
+}
+
+export default ({ product, setSize }: Props) => {
   return (
     <div className="flex gap-x-2">
       {product.sizes.map((size, index) => (

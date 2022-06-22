@@ -1,6 +1,13 @@
 import { Heart, HeartSolid } from '../icons/Heart'
+import { Product } from '../../types/Product'
+import { Favourites } from '../../types/Favourites'
 
-export default ({ product, favourites }) => {
+type Props = {
+  product: Product
+  favourites: Favourites
+}
+
+export default ({ product, favourites }: Props) => {
   let className =
     'rounded-full w-10 h-10 p-0 border-0 inline-flex items-center justify-center self-center ml-4 bg-primary text-white'
 
@@ -14,9 +21,13 @@ export default ({ product, favourites }) => {
       className={className}
     >
       {favourites.check(product) ? (
-        <Heart className={`w-6 h-6 ${className}`} />
+        <span className={`w-6 h-6 ${className}`}>
+          <Heart />
+        </span>
       ) : (
-        <HeartSolid className={`w-6 h-6 ${className}`} />
+        <span className={`w-6 h-6 ${className}`}>
+          <HeartSolid />
+        </span>
       )}
     </button>
   )

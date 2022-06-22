@@ -3,8 +3,26 @@ import PlusIcon from '../icons/Plus'
 import MinusIcon from '../icons/Minus'
 import TrashIcon from '../icons/Trash'
 import AddToCartButton from './AddButton'
+import { Cart } from '../../types/Cart'
+import { ProductDetails } from '../../types/Product'
+import { Store } from '../../types/Store'
 
-export default ({ product, color, size, qty, store, cart, onRemoved }) => {
+type Props = ProductDetails & {
+  qty: Number
+  cart: Cart
+  store: Store
+  onRemoved: () => null
+}
+
+export default ({
+  product,
+  color,
+  size,
+  qty,
+  store,
+  cart,
+  onRemoved
+}: Props) => {
   return (
     <div className="flex gap-x-5">
       <img className="w-1/4" src={`/product-images/${product.images[0]}`} />
@@ -32,7 +50,9 @@ export default ({ product, color, size, qty, store, cart, onRemoved }) => {
               className="w-full h-full py-2 flex justify-center items-center rounded cursor-pointer duration-200"
             >
               <span className="flex invisible rounded-full w-100 h-100 text-white bg-primary ">
-                <CheckIcon className="w-6 h-6 text-bold" />
+                <span className="w-6 h-6 text-bold">
+                  <CheckIcon />
+                </span>
               </span>
             </label>
           </div>
@@ -60,7 +80,10 @@ export default ({ product, color, size, qty, store, cart, onRemoved }) => {
               }
               className="flex justify-center w-full text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-primaryHover rounded"
             >
-              <TrashIcon className="w-6 h-6" />
+              {' '}
+              <span className="w-6 h-6">
+                <TrashIcon />
+              </span>
               Remove
             </button>
           </div>
@@ -75,7 +98,7 @@ export default ({ product, color, size, qty, store, cart, onRemoved }) => {
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <span className="text-2xl">${product.price}</span>
+        <span className="text-2xl">{`$${product.price}`}</span>
       </div>
     </div>
   )

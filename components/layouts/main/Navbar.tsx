@@ -2,8 +2,9 @@ import SearchIcon from '../../icons/Search'
 import ShoppingCartIcon from '../../icons/ShoppingCart'
 import NavLink from './navbar/Link'
 import Link from 'next/link'
+import { Store } from '../../../types/Store'
 
-export default ({ store }) => {
+export default ({ store }: { store: Store }) => {
   return (
     <header className="text-gray-600 body-font navbar">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -29,7 +30,9 @@ export default ({ store }) => {
         </nav>
         <div className="flex gap-x-3">
           <div className="flex search-btn hover:gap-x-3 hover:cursor-pointer duration-200 items-center justify-center text-white bg-indigo-500 border-0 w-14 h-14 rounded-full">
-            <SearchIcon className="w-6 h-6 search-icon" />
+            <span className="w-6 h-6 search-icon">
+              <SearchIcon />
+            </span>
             <input
               type="text"
               className="bg-transparent w-0 py-1 focus:outline-none border-b-2 border-b-white search-input"
@@ -37,7 +40,9 @@ export default ({ store }) => {
           </div>
           <Link href="/cart">
             <a className="flex items-center relative hover:cursor-pointer justify-center text-white bg-indigo-500 border-0 w-14 h-14 hover:bg-primaryHover rounded-full">
-              <ShoppingCartIcon className="w-6 h-6" />
+              <span className="w-6 h-6">
+                <ShoppingCartIcon />
+              </span>
               {Object.keys(store.state.cart).length > 0 ? (
                 <span className="bg-red-600 text-white absolute -top-1 -right-1 text-sm font-semibold flex items-center justify-center h-6 w-6 rounded-full dark:bg-blue-200 dark:text-blue-800">
                   {Object.keys(store.state.cart).length}

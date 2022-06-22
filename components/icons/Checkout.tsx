@@ -1,11 +1,6 @@
-export default ({ className }) => {
+export default () => {
   return (
-    <svg
-      className={className}
-      fill="white"
-      stroke="currentColor"
-      viewBox="0 0 236.764 236.764"
-    >
+    <svg fill="white" stroke="currentColor" viewBox="0 0 236.764 236.764">
       <g>
         <path
           strokeLinecap="round"

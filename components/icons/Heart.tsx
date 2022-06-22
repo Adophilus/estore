@@ -1,7 +1,6 @@
-const HeartSolid = ({ className }) => {
+const HeartSolid = () => {
   return (
     <svg
-      className="w-6 h-6"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -17,10 +16,9 @@ const HeartSolid = ({ className }) => {
   )
 }
 
-const Heart = ({ className }) => {
+const Heart = () => {
   return (
     <svg
-      className="w-6 h-6"
       fill="currentColor"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,13 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { ReactNode } from 'react'
 
-export default ({ to, children }) => {
+type Props = {
+  to: string
+  children: ReactNode
+}
+
+export default ({ to, children }: Props) => {
   const router = useRouter()
 
   let className = 'nav-link py-4 relative'

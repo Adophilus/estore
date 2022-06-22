@@ -1,3 +1,5 @@
+import { Product, ProductDetails } from '../types/Product'
+
 export default function ({ store }) {
   const create = async () => {
     const res = await fetch('/api/cart', {
@@ -15,7 +17,7 @@ export default function ({ store }) {
     return res.ok
   }
 
-  const check = () => {
+  const check = (): Array<Product> => {
     if (typeof window === 'undefined') return
     if (!this.id) {
       this.id = localStorage.getItem('cart')
@@ -27,7 +29,7 @@ export default function ({ store }) {
     await check()
   }
 
-  this.fetchItems = async () => {
+  this.fetchItems = async (): Array<Product> => {
     const res = await fetch(`/api/cart/${this.id}`, {
       method: 'GET',
       headers: {
@@ -46,7 +48,7 @@ export default function ({ store }) {
     }
   }
 
-  this.addItem = async ({ product, color, size }) => {
+  this.addItem = async ({ product, color, size }: ProductDetails) => {
     if (!(await check())) return
 
     let newStore = { ...store.state }
@@ -70,7 +72,7 @@ export default function ({ store }) {
     }
   }
 
-  this.removeItem = async ({ product, color, size }) => {
+  this.removeItem = async ({ product, color, size }: ProductDetails) => {
     if (!(await check())) return
 
     let newStore = { ...store.state }
@@ -103,7 +105,7 @@ export default function ({ store }) {
     }
   }
 
-  this.deleteItem = async ({ product, color, size }) => {
+  this.deleteItem = async ({ product, color, size }: ProductDetails) => {
     if (!(await check())) return
 
     let newStore = { ...store.state }
@@ -126,7 +128,7 @@ export default function ({ store }) {
     return { ...store.state.cart }
   }
 
-  this.hasItem = ({ product, color, size }) => {
+  this.hasItem = ({ product, color, size }: ProductDetails) => {
     if (!store.state.cart[product.slug]) return false
 
     return store.state.cart[product.slug]?.find(
@@ -134,7 +136,7 @@ export default function ({ store }) {
     )
   }
 
-  this.numberOfProducts = ({ product, color, size }) => {
+  this.numberOfProducts = ({ product, color, size }: ProductDetails) => {
     return store.state.cart[product.slug]?.find(
       (_variant) => _variant.color === color && _variant.size === size
     )?.qty

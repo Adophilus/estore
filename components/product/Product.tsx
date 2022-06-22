@@ -1,8 +1,19 @@
 import Link from 'next/link'
 import FavouriteButton from '../favourite/Button'
 import AddToCartButton from '../cart/AddButton'
+import { Cart } from '../../types/Cart'
+import { Product } from '../../types/Product'
+import { Store } from '../../types/Store'
+import { Favourites } from '../../types/Favourites'
 
-export default ({ product, store, cart, favourites }) => {
+type Props = {
+  product: Product
+  store: Store
+  cart: Cart
+  favourites: Favourites
+}
+
+export default ({ product, store, cart, favourites }: Props) => {
   const { name, price, slug, images } = product
 
   return (
@@ -29,7 +40,7 @@ export default ({ product, store, cart, favourites }) => {
             </h2>
           </a>
         </Link>
-        <p className="mt-1">${price}</p>
+        <p className="mt-1">{`$${price}`}</p>
       </div>
       <div className="mt-4 flex">
         <AddToCartButton
