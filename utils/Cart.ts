@@ -5,7 +5,7 @@ export default function ({ store }) {
   let self: Cart = { id: null }
 
   const create = async () => {
-    const res = await fetch('/api/cart', {
+    const res = await fetch(`${window.location.origin}/api/cart`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ export default function ({ store }) {
   }
 
   self.fetchItems = async () => {
-    const res = await fetch(`/api/cart/${self.id}`, {
+    const res = await fetch(`${window.location.origin}/api/cart/${self.id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ export default function ({ store }) {
     if (variant) variant.qty += 1
     else newStore.cart[product.slug].push({ color, size, qty: 1 })
 
-    const res = await fetch(`/api/cart/${self.id}`, {
+    const res = await fetch(`${window.location.origin}/api/cart/${self.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -95,7 +95,7 @@ export default function ({ store }) {
         : null
       : null
 
-    const res = await fetch(`/api/cart/${self.id}`, {
+    const res = await fetch(`${window.location.origin}/api/cart/${self.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -114,7 +114,7 @@ export default function ({ store }) {
     let newStore = { ...store.state }
     delete newStore.cart[product.slug]
 
-    const res = await fetch(`/api/cart/${self.id}`, {
+    const res = await fetch(`${window.location.origin}/api/cart/${self.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -153,12 +153,15 @@ export default function ({ store }) {
       0,
       ...(await Promise.all(
         Object.keys(cartItems).map(async (slug) => {
-          const res = await fetch(`/api/products/${slug}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
+          const res = await fetch(
+            `${window.location.origin}/api/products/${slug}`,
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json'
+              }
             }
-          })
+          )
 
           if (!res.ok) {
             return
@@ -176,7 +179,9 @@ export default function ({ store }) {
   }
 
   self.checkout = async () => {
-    const checkoutSession = await fetch(`/api/cart/${self.id}/checkout`)
+    const checkoutSession = await fetch(
+      `${window.location.origin}/api/cart/${self.id}/checkout`
+    )
     if (!checkoutSession.ok) {
       return
     }
@@ -191,7 +196,7 @@ export default function ({ store }) {
     let newStore = { ...store.state }
     newStore.cart = {}
 
-    const res = await fetch(`/api/cart/${self.id}`, {
+    const res = await fetch(`${window.location.origin}/api/cart/${self.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

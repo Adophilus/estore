@@ -19,12 +19,15 @@ export default ({ store, cart, favourites }) => {
 
   useEffect(() => {
     ;(async () => {
-      const res = await fetch(`/api/products/${slug}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
+      const res = await fetch(
+        `${window.location.origin}/api/products/${slug}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      })
+      )
 
       if (!res.ok) {
         console.warn(`Error: ${res.status}`)

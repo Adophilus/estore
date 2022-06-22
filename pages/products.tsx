@@ -7,21 +7,22 @@ import { useState } from 'react'
 export default ({ store, cart, favourites }) => {
   const [products, setProducts] = useState([])
 
-  ;(async () => {
-    const res = await fetch('/api/products', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
+  if (typeof window !== 'undefined')
+    (async () => {
+      const res = await fetch(`${window.location.origin}/api/products`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (!res.ok) {
+        throw new Error(`Error: ${res.status}`)
       }
-    })
 
-    if (!res.ok) {
-      throw new Error(`Error: ${res.status}`)
-    }
-
-    const products = await res.json()
-    setProducts(products)
-  })()
+      const products = await res.json()
+      setProducts(products)
+    })()
 
   return (
     <StoreLayout store={store}>

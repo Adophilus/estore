@@ -9,7 +9,7 @@ import { Favourites as TFavourites } from '../types/Favourites'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const store: TStore = Store()
-  const cart: TCart = Cart({ store })
+  const cart = Cart({ store })
   const favourites: TFavourites = Favourites({ store })
 
   return (

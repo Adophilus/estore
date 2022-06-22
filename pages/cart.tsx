@@ -15,12 +15,15 @@ export default ({ store, cart }) => {
       const slugs = Object.keys(items)
       let p = []
       for (let i = 0; i < slugs.length; i++) {
-        const res = await fetch(`/api/products/${slugs[i]}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
+        const res = await fetch(
+          `${window.location.origin}/api/products/${slugs[i]}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }
-        })
+        )
 
         if (!res.ok) {
           console.warn(`Error: ${res.status}`)
