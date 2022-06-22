@@ -1,7 +1,3 @@
-import dotenv from 'dotenv'
-
-dotenv.config()
-
 const config = {
   app: {
     baseUrl: process.env.BASE_URL
