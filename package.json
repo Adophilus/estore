@@ -3,8 +3,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start --port $PORT",
-    "start:local": "next start",
+    "start": "next start",
     "lint": "pnpm eslint .",
     "lint:fix": "eslint --fix",
     "format:watch": "node scripts/format.js",
