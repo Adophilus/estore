@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "next start --port $PORT",
+    "start:local": "next start",
     "lint": "pnpm eslint .",
     "lint:fix": "eslint --fix",
     "format:watch": "node scripts/format.js",
@@ -16,7 +17,8 @@
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "stripe": "^9.9.0"
+    "stripe": "^9.9.0",
+    "dotenv": "^16.0.1"
   },
   "devDependencies": {
     "@types/node": "17.0.35",
