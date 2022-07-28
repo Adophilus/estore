@@ -1,0 +1,24 @@
+{
+  "name": "estore-2",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "db:start": "env $(cat .env | xargs) bin/pocketbase serve --dir .data/pb_data --encryptionEnv=POCKETBASE_ENCRYPTION_KEY"
+  },
+  "dependencies": {
+    "pocketbase": "^0.2.2",
+    "preact": "^10.9.0",
+    "preact-async-route": "^2.2.1",
+    "preact-router": "^4.1.0"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.3.0",
+    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0"
+  }
+}
