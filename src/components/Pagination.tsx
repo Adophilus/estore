@@ -1,14 +1,12 @@
-export default function () {
+export default function ({ products }) {
   return (
     <div className="col-lg-12">
       <div className="product__pagination">
         <a className="active" href="#">
           1
         </a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <span>...</span>
-        <a href="#">21</a>
+        {products.page === 1 &&
+          [1, 2].map((index) => <a href="#">{products.page + index}</a>)}
       </div>
     </div>
   )

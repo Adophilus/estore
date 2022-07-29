@@ -17,7 +17,7 @@ export default function () {
     sizes: new Set((queryParams.get('sizes') || '').split(',')) || new Set()
   }
   const { pocketBaseClient } = useContext(AppContext)
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState()
   const [categories, setCategories] = useState([])
   const [tags, setTags] = useState([])
   const [sizes, setSizes] = useState([])
@@ -45,14 +45,13 @@ export default function () {
     for (let size of search.sizes) {
       filter += `&& sizes.name ~ '${size}' `
     }
-    console.log(filter)
     let res = await pocketBaseClient.Records.getList('products', 1, 30, {
       $autoCancel: false,
       filter,
       sort: 'name',
       expand: 'cover'
     })
-    setProducts(res.items)
+    setProducts(res)
 
     res = await pocketBaseClient.Records.getFullList('product_categories', 10, {
       $autoCancel: false
@@ -74,6 +73,13 @@ export default function () {
     $(selectRef.current).niceSelect()
     getDetails()
   }, [])
+
+  if (sizes.length === 0)
+    return (
+      <div id="loader">
+        <div className="loader"></div>
+      </div>
+    )
 
   return (
     <Layout>
@@ -121,7 +127,7 @@ export default function () {
                       </div>
                       <div
                         id="collapseOne"
-                        className="collapse show"
+                        className="collapse"
                         data-parent="#accordionExample"
                       >
                         <div className="card-body">
@@ -168,7 +174,7 @@ export default function () {
                       </div>
                       <div
                         id="collapseThree"
-                        className="collapse show"
+                        className="collapse"
                         data-parent="#accordionExample"
                       >
                         <div className="card-body">
@@ -209,7 +215,7 @@ export default function () {
                       </div>
                       <div
                         id="collapseFour"
-                        className="collapse show"
+                        className="collapse"
                         data-parent="#accordionExample"
                       >
                         <div className="card-body">
@@ -243,7 +249,7 @@ export default function () {
                       </div>
                       <div
                         id="collapseSix"
-                        className="collapse show"
+                        className="collapse"
                         data-parent="#accordionExample"
                       >
                         <div className="card-body">
@@ -273,36 +279,53 @@ export default function () {
               </div>
             </div>
             <div className="col-lg-9">
-              <div className="shop__product__option">
-                <div className="row">
-                  <div className="col-lg-6 col-md-6 col-sm-6">
-                    <div className="shop__product__option__left">
-                      <p>Showing 1–12 of 126 results</p>
+              {products.items.length ? (
+                <>
+                  <div className="shop__product__option">
+                    <div className="row">
+                      <div className="col-lg-6 col-md-6 col-sm-6">
+                        <div className="shop__product__option__left">
+                          <p>
+                            Showing {(products.page - 1) * products.perPage + 1}{' '}
+                            – {Math.min(products.totalItems, products.perPage)}{' '}
+                            of {products.totalItems} results
+                          </p>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 col-md-6 col-sm-6">
+                        <div className="shop__product__option__right">
+                          <p>Sort by Price:</p>
+                          <select ref={selectRef} className="nice-select">
+                            <option value="alphabetical">A-Z</option>
+                            <option value="low-to-high">Most Popular</option>
+                            <option value="low-to-high">Low To High</option>
+                            <option value="high-to-low">High To Low</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="col-lg-6 col-md-6 col-sm-6">
-                    <div className="shop__product__option__right">
-                      <p>Sort by Price:</p>
-                      <select ref={selectRef} className="nice-select">
-                        <option value="alphabetical">A-Z</option>
-                        <option value="low-to-high">Most Popular</option>
-                        <option value="low-to-high">Low To High</option>
-                        <option value="high-to-low">High To Low</option>
-                      </select>
-                    </div>
+                  <div className="row">
+                    {products.items.map((product, index) => (
+                      <div className="col-lg-4 col-md-6 col-sm-6">
+                        <Product key={index} product={product} />
+                      </div>
+                    ))}
                   </div>
+                  <div className="row">
+                    <Pagination products={products} />
+                  </div>
+                </>
+              ) : (
+                <div className="d-flex flex-column align-items-center py-3">
+                  <i
+                    class="fa fa-archive text-muted"
+                    aria-hidden="true"
+                    style="font-size: 4rem"
+                  ></i>
+                  <h3 className="text-muted">No products found!</h3>
                 </div>
-              </div>
-              <div className="row">
-                {products.map((product, index) => (
-                  <div className="col-lg-4 col-md-6 col-sm-6">
-                    <Product key={index} product={product} />
-                  </div>
-                ))}
-              </div>
-              <div className="row">
-                <Pagination />
-              </div>
+              )}
             </div>
           </div>
         </div>
