@@ -14,7 +14,8 @@ export default function () {
     minPrice: Number(queryParams.get('minPrice')) || 0,
     maxPrice: Number(queryParams.get('minPrice')) || 1000,
     tags: new Set((queryParams.get('tags') || '').split(',')) || new Set(),
-    sizes: new Set((queryParams.get('sizes') || '').split(',')) || new Set()
+    sizes: new Set((queryParams.get('sizes') || '').split(',')) || new Set(),
+    page: Number(queryParams.get('page')) || 1
   }
   const { pocketBaseClient } = useContext(AppContext)
   const [products, setProducts] = useState()
@@ -23,8 +24,9 @@ export default function () {
   const [sizes, setSizes] = useState([])
   const selectRef = useRef()
 
+  // execute this function when the search button is clicked
   const searchForProduct = (e) => {
-    e.preventDefault()
+    if (e) e.preventDefault()
 
     let localSearch = { ...search }
     localSearch.categories = Array.from(localSearch.categories)
@@ -34,6 +36,12 @@ export default function () {
       .map((key) => `${key}=${window.encodeURIComponent(localSearch[key])}`)
       .join('&')}`
   }
+
+  const onPageChange = (pageNumber) => {
+    search.page = pageNumber
+    searchForProduct()
+  }
+
   const getDetails = async () => {
     let filter = `name ~ '${search.name}' && price >= ${search.minPrice} && price <= ${search.maxPrice} `
     for (let category of search.categories) {
@@ -45,12 +53,17 @@ export default function () {
     for (let size of search.sizes) {
       filter += `&& sizes.name ~ '${size}' `
     }
-    let res = await pocketBaseClient.Records.getList('products', 1, 30, {
-      $autoCancel: false,
-      filter,
-      sort: 'name',
-      expand: 'cover'
-    })
+    let res = await pocketBaseClient.Records.getList(
+      'products',
+      search.page,
+      30,
+      {
+        $autoCancel: false,
+        filter,
+        sort: 'name',
+        expand: 'cover'
+      }
+    )
     setProducts(res)
 
     res = await pocketBaseClient.Records.getFullList('product_categories', 10, {
@@ -313,7 +326,10 @@ export default function () {
                     ))}
                   </div>
                   <div className="row">
-                    <Pagination products={products} />
+                    <Pagination
+                      products={products}
+                      onPageChange={onPageChange}
+                    />
                   </div>
                 </>
               ) : (
