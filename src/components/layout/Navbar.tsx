@@ -74,7 +74,10 @@ export default function () {
           </div>
           <div className="col-lg-3 col-md-3">
             <div className="header__nav__option">
-              <a href="#" className="search-switch">
+              <a
+                onClick={() => $('.search-model').fadeIn(400)}
+                className="search-switch"
+              >
                 <img src="/img/icon/search.png" alt="" />
               </a>
               <a href="#">
