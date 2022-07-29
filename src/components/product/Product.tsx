@@ -45,7 +45,7 @@ export default function ({ product }) {
           <i className="fa fa-star-o"></i>
           <i className="fa fa-star-o"></i>
         </div>
-        <h5>${product.price}</h5>
+        <h5>${product.price.toFixed(2)}</h5>
         <div className="product__color__select">
           {product.colors.map((color, index) => (
             <label
