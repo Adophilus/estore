@@ -1,0 +1,50 @@
+.shop__form {
+  margin-bottom: 45px;
+}
+
+.shop__form .form__control {
+  display: flex;
+  border: 1px solid #3d3d3d;
+}
+
+.shop__form .form__control button {
+  background-color: black;
+  color: white;
+  border: 0;
+}
+
+.shop__form .form__control input {
+  width: 100%;
+  font-size: 15px;
+  color: #444444;
+  border: 0;
+  height: 42px;
+}
+
+.shop__form .form__control input::-webkit-input-placeholder {
+  color: #b7b7b7;
+}
+
+.shop__form .form__control input::-moz-placeholder {
+  color: #b7b7b7;
+}
+
+.shop__form .form__control input:-ms-input-placeholder {
+  color: #b7b7b7;
+}
+
+.shop__form .form__control input::-ms-input-placeholder {
+  color: #b7b7b7;
+}
+
+.shop__form .form__control input::placeholder {
+  color: #b7b7b7;
+}
+
+.shop__form .form__control i {
+  border-right: 0;
+  height: 100%;
+  color: #444444;
+  align-self: center;
+  background: transparent;
+}

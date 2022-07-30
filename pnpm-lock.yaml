@@ -1,20 +1,24 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@formkit/auto-animate': 1.0.0-beta.1
   '@preact/preset-vite': ^2.3.0
   '@trivago/prettier-plugin-sort-imports': ^3.3.0
   pocketbase: ^0.2.2
   preact: ^10.9.0
   preact-async-route: ^2.2.1
   preact-router: ^4.1.0
+  react: link:@formkit/auto-animate/react
   typescript: ^4.6.4
   vite: ^3.0.0
 
 dependencies:
+  '@formkit/auto-animate': 1.0.0-beta.1_4ozkm7rck4tho66o73iraa5vt4
   pocketbase: 0.2.2
   preact: 10.10.0
   preact-async-route: 2.2.1
   preact-router: 4.1.0_preact@10.10.0
+  react: link:@formkit/auto-animate/react
 
 devDependencies:
   '@preact/preset-vite': 2.3.0_preact@10.10.0+vite@3.0.3
@@ -340,6 +344,20 @@ packages:
       '@babel/helper-validator-identifier': 7.18.6
       to-fast-properties: 2.0.0
     dev: true
+
+  /@formkit/auto-animate/1.0.0-beta.1_4ozkm7rck4tho66o73iraa5vt4:
+    resolution: {integrity: sha512-I3OWOBaPZKSJL4bsooXI8kC3q7bcgibD2oML0P/Lir6MnbvUe/0/7EH8br024juvM/Ulm9C9xGx9CJUQYrOWSA==}
+    peerDependencies:
+      react: ^16.8.0
+      vue: ^3.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      react: link:@formkit/auto-animate/react
+    dev: false
 
   /@jridgewell/gen-mapping/0.1.1:
     resolution: {integrity: sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w==}

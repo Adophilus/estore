@@ -1,6 +1,10 @@
+import AppContext from '../../contexts/App'
 import { Link } from 'preact-router/match'
+import { useContext } from 'preact/hooks'
 
 export default function () {
+  const { cart } = useContext(AppContext)
+
   return (
     <header className="header">
       <div className="header__top">
@@ -14,8 +18,13 @@ export default function () {
             <div className="col-lg-6 col-md-5">
               <div className="header__top__right">
                 <div className="header__top__links">
-                  <a href="#">Sign in</a>
-                  <a href="#">FAQs</a>
+                  <Link href="/login">
+                    <i class="fa fa-user" aria-hidden="true"></i>&nbsp; Sign in
+                  </Link>
+                  <a href="/faqs">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    &nbsp; FAQs
+                  </a>
                 </div>
                 <div className="header__top__hover">
                   <span>
@@ -80,13 +89,13 @@ export default function () {
               >
                 <img src="/img/icon/search.png" alt="" />
               </a>
-              <a href="#">
+              <Link href="/user/favourites">
                 <img src="/img/icon/heart.png" alt="" />
-              </a>
-              <a href="#">
-                <img src="/img/icon/cart.png" alt="" /> <span>0</span>
-              </a>
-              <div className="price">$0.00</div>
+              </Link>
+              <Link href="/user/cart">
+                <img src="/img/icon/cart.png" alt="" />{' '}
+                <span>{cart.items}</span>
+              </Link>
             </div>
           </div>
         </div>
