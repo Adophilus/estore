@@ -1871,6 +1871,10 @@ ol {
   border-radius: 50%;
 }
 
+.product__details__option__color label.active:after {
+  border: 1px solid black;
+}
+
 .product__details__option__color label input {
   position: absolute;
   visibility: hidden;

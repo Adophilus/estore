@@ -5,7 +5,7 @@ export default function () {
     <Layout>
       <section className="hero">
         <div className="hero__slider owl-carousel">
-          <div className="hero__items set-bg" data-setbg="img/hero/hero-1.jpg">
+          <div className="hero__items set-bg" data-setbg="/img/hero/hero-1.jpg">
             <div className="container">
               <div className="row">
                 <div className="col-xl-5 col-lg-7 col-md-8">
@@ -39,7 +39,7 @@ export default function () {
               </div>
             </div>
           </div>
-          <div className="hero__items set-bg" data-setbg="img/hero/hero-2.jpg">
+          <div className="hero__items set-bg" data-setbg="/img/hero/hero-2.jpg">
             <div className="container">
               <div className="row">
                 <div className="col-xl-5 col-lg-7 col-md-8">
@@ -82,7 +82,7 @@ export default function () {
             <div className="col-lg-7 offset-lg-4">
               <div className="banner__item">
                 <div className="banner__item__pic">
-                  <img src="img/banner/banner-1.jpg" alt="" />
+                  <img src="/img/banner/banner-1.jpg" alt="" />
                 </div>
                 <div className="banner__item__text">
                   <h2>Clothing Collections 2030</h2>
@@ -93,7 +93,7 @@ export default function () {
             <div className="col-lg-5">
               <div className="banner__item banner__item--middle">
                 <div className="banner__item__pic">
-                  <img src="img/banner/banner-2.jpg" alt="" />
+                  <img src="/img/banner/banner-2.jpg" alt="" />
                 </div>
                 <div className="banner__item__text">
                   <h2>Accessories</h2>
@@ -104,7 +104,7 @@ export default function () {
             <div className="col-lg-7">
               <div className="banner__item banner__item--last">
                 <div className="banner__item__pic">
-                  <img src="img/banner/banner-3.jpg" alt="" />
+                  <img src="/img/banner/banner-3.jpg" alt="" />
                 </div>
                 <div className="banner__item__text">
                   <h2>Shoes Spring 2030</h2>
@@ -134,24 +134,24 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="img/product/product-1.jpg"
+                  data-setbg="/img/product/product-1.jpg"
                 >
                   <span className="label">New</span>
                   <ul className="product__hover">
                     <li>
                       <a href="#">
-                        <img src="img/icon/heart.png" alt="" />
+                        <img src="/img/icon/heart.png" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/compare.png" alt="" />{' '}
+                        <img src="/img/icon/compare.png" alt="" />{' '}
                         <span>Compare</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/search.png" alt="" />
+                        <img src="/img/icon/search.png" alt="" />
                       </a>
                     </li>
                   </ul>
@@ -187,23 +187,23 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="img/product/product-2.jpg"
+                  data-setbg="/img/product/product-2.jpg"
                 >
                   <ul className="product__hover">
                     <li>
                       <a href="#">
-                        <img src="img/icon/heart.png" alt="" />
+                        <img src="/img/icon/heart.png" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/compare.png" alt="" />{' '}
+                        <img src="/img/icon/compare.png" alt="" />{' '}
                         <span>Compare</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/search.png" alt="" />
+                        <img src="/img/icon/search.png" alt="" />
                       </a>
                     </li>
                   </ul>
@@ -239,24 +239,24 @@ export default function () {
               <div className="product__item sale">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="img/product/product-3.jpg"
+                  data-setbg="/img/product/product-3.jpg"
                 >
                   <span className="label">Sale</span>
                   <ul className="product__hover">
                     <li>
                       <a href="#">
-                        <img src="img/icon/heart.png" alt="" />
+                        <img src="/img/icon/heart.png" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/compare.png" alt="" />{' '}
+                        <img src="/img/icon/compare.png" alt="" />{' '}
                         <span>Compare</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/search.png" alt="" />
+                        <img src="/img/icon/search.png" alt="" />
                       </a>
                     </li>
                   </ul>
@@ -292,23 +292,23 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="img/product/product-4.jpg"
+                  data-setbg="/img/product/product-4.jpg"
                 >
                   <ul className="product__hover">
                     <li>
                       <a href="#">
-                        <img src="img/icon/heart.png" alt="" />
+                        <img src="/img/icon/heart.png" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/compare.png" alt="" />{' '}
+                        <img src="/img/icon/compare.png" alt="" />{' '}
                         <span>Compare</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/search.png" alt="" />
+                        <img src="/img/icon/search.png" alt="" />
                       </a>
                     </li>
                   </ul>
@@ -344,23 +344,23 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="img/product/product-5.jpg"
+                  data-setbg="/img/product/product-5.jpg"
                 >
                   <ul className="product__hover">
                     <li>
                       <a href="#">
-                        <img src="img/icon/heart.png" alt="" />
+                        <img src="/img/icon/heart.png" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/compare.png" alt="" />{' '}
+                        <img src="/img/icon/compare.png" alt="" />{' '}
                         <span>Compare</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/search.png" alt="" />
+                        <img src="/img/icon/search.png" alt="" />
                       </a>
                     </li>
                   </ul>
@@ -396,24 +396,24 @@ export default function () {
               <div className="product__item sale">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="img/product/product-6.jpg"
+                  data-setbg="/img/product/product-6.jpg"
                 >
                   <span className="label">Sale</span>
                   <ul className="product__hover">
                     <li>
                       <a href="#">
-                        <img src="img/icon/heart.png" alt="" />
+                        <img src="/img/icon/heart.png" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/compare.png" alt="" />{' '}
+                        <img src="/img/icon/compare.png" alt="" />{' '}
                         <span>Compare</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/search.png" alt="" />
+                        <img src="/img/icon/search.png" alt="" />
                       </a>
                     </li>
                   </ul>
@@ -449,23 +449,23 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="img/product/product-7.jpg"
+                  data-setbg="/img/product/product-7.jpg"
                 >
                   <ul className="product__hover">
                     <li>
                       <a href="#">
-                        <img src="img/icon/heart.png" alt="" />
+                        <img src="/img/icon/heart.png" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/compare.png" alt="" />{' '}
+                        <img src="/img/icon/compare.png" alt="" />{' '}
                         <span>Compare</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/search.png" alt="" />
+                        <img src="/img/icon/search.png" alt="" />
                       </a>
                     </li>
                   </ul>
@@ -501,23 +501,23 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="img/product/product-8.jpg"
+                  data-setbg="/img/product/product-8.jpg"
                 >
                   <ul className="product__hover">
                     <li>
                       <a href="#">
-                        <img src="img/icon/heart.png" alt="" />
+                        <img src="/img/icon/heart.png" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/compare.png" alt="" />{' '}
+                        <img src="/img/icon/compare.png" alt="" />{' '}
                         <span>Compare</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="img/icon/search.png" alt="" />
+                        <img src="/img/icon/search.png" alt="" />
                       </a>
                     </li>
                   </ul>
@@ -566,7 +566,7 @@ export default function () {
             </div>
             <div className="col-lg-4">
               <div className="categories__hot__deal">
-                <img src="img/product-sale.png" alt="" />
+                <img src="/img/product-sale.png" alt="" />
                 <div className="hot__deal__sticker">
                   <span>Sale Of</span>
                   <h5>$29.99</h5>
@@ -614,27 +614,27 @@ export default function () {
               <div className="instagram__pic">
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="img/instagram/instagram-1.jpg"
+                  data-setbg="/img/instagram/instagram-1.jpg"
                 ></div>
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="img/instagram/instagram-2.jpg"
+                  data-setbg="/img/instagram/instagram-2.jpg"
                 ></div>
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="img/instagram/instagram-3.jpg"
+                  data-setbg="/img/instagram/instagram-3.jpg"
                 ></div>
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="img/instagram/instagram-4.jpg"
+                  data-setbg="/img/instagram/instagram-4.jpg"
                 ></div>
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="img/instagram/instagram-5.jpg"
+                  data-setbg="/img/instagram/instagram-5.jpg"
                 ></div>
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="img/instagram/instagram-6.jpg"
+                  data-setbg="/img/instagram/instagram-6.jpg"
                 ></div>
               </div>
             </div>
@@ -667,11 +667,11 @@ export default function () {
               <div className="blog__item">
                 <div
                   className="blog__item__pic set-bg"
-                  data-setbg="img/blog/blog-1.jpg"
+                  data-setbg="/img/blog/blog-1.jpg"
                 ></div>
                 <div className="blog__item__text">
                   <span>
-                    <img src="img/icon/calendar.png" alt="" /> 16 February 2020
+                    <img src="/img/icon/calendar.png" alt="" /> 16 February 2020
                   </span>
                   <h5>What Curling Irons Are The Best Ones</h5>
                   <a href="#">Read More</a>
@@ -682,11 +682,11 @@ export default function () {
               <div className="blog__item">
                 <div
                   className="blog__item__pic set-bg"
-                  data-setbg="img/blog/blog-2.jpg"
+                  data-setbg="/img/blog/blog-2.jpg"
                 ></div>
                 <div className="blog__item__text">
                   <span>
-                    <img src="img/icon/calendar.png" alt="" /> 21 February 2020
+                    <img src="/img/icon/calendar.png" alt="" /> 21 February 2020
                   </span>
                   <h5>Eternity Bands Do Last Forever</h5>
                   <a href="#">Read More</a>
@@ -697,11 +697,11 @@ export default function () {
               <div className="blog__item">
                 <div
                   className="blog__item__pic set-bg"
-                  data-setbg="img/blog/blog-3.jpg"
+                  data-setbg="/img/blog/blog-3.jpg"
                 ></div>
                 <div className="blog__item__text">
                   <span>
-                    <img src="img/icon/calendar.png" alt="" /> 28 February 2020
+                    <img src="/img/icon/calendar.png" alt="" /> 28 February 2020
                   </span>
                   <h5>The Health Benefits Of Sunglasses</h5>
                   <a href="#">Read More</a>

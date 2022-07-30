@@ -9,14 +9,16 @@ export default function ({ matches }) {
   const { pocketBaseClient } = useContext(AppContext)
   const [product, setProduct] = useState(null)
   const [tabImage, setTabImage] = useState(null)
+  const currentSize = useRef()
+  const currentColor = useRef()
 
   const getProduct = async () => {
     const res = await pocketBaseClient.Records.getList('products', 1, 1, {
       filter: `slug = '${slug}'`,
-      expand: 'images'
+      expand: 'category,images,sizes,tags'
     })
-    setProduct(res.items[0])
     setTabImage(res.items[0]['@expand'].images[0])
+    setProduct(res.items[0])
   }
 
   useEffect(() => {
@@ -107,40 +109,44 @@ export default function ({ matches }) {
                   <div className="product__details__option">
                     <div className="product__details__option__size">
                       <span>Size:</span>
-                      <label for="xxl">
-                        xxl
-                        <input type="radio" id="xxl" />
-                      </label>
-                      <label className="active" for="xl">
-                        xl
-                        <input type="radio" id="xl" />
-                      </label>
-                      <label for="l">
-                        l
-                        <input type="radio" id="l" />
-                      </label>
-                      <label for="sm">
-                        s
-                        <input type="radio" id="sm" />
-                      </label>
+                      {product['@expand'].sizes.map((size) => (
+                        <label
+                          onClick={(e) => {
+                            if (currentSize.current === e.target) return
+                            if (!currentSize.current) {
+                              currentSize.current = e.target
+                              currentSize.current.classList.add('active')
+                              return
+                            }
+                            currentSize.current.classList.remove('active')
+                            currentSize.current = e.target
+                            currentSize.current.classList.add('active')
+                          }}
+                        >
+                          {size.name}
+                        </label>
+                      ))}
                     </div>
                     <div className="product__details__option__color">
                       <span>Color:</span>
-                      <label className="c-1" for="sp-1">
-                        <input type="radio" id="sp-1" />
-                      </label>
-                      <label className="c-2" for="sp-2">
-                        <input type="radio" id="sp-2" />
-                      </label>
-                      <label className="c-3" for="sp-3">
-                        <input type="radio" id="sp-3" />
-                      </label>
-                      <label className="c-4" for="sp-4">
-                        <input type="radio" id="sp-4" />
-                      </label>
-                      <label className="c-9" for="sp-9">
-                        <input type="radio" id="sp-9" />
-                      </label>
+                      {product.colors.map((color) => (
+                        <label
+                          onClick={(e) => {
+                            if (currentColor.current === e.target) return
+                            if (!currentColor.current) {
+                              currentColor.current = e.target
+                              currentColor.current.classList.add('active')
+                              return
+                            }
+                            currentColor.current.classList.remove('active')
+                            currentColor.current = e.target
+                            currentColor.current.classList.add('active')
+                          }}
+                          style={{
+                            backgroundColor: color
+                          }}
+                        ></label>
+                      ))}
                     </div>
                   </div>
                   <div className="product__details__cart__option">
@@ -168,13 +174,17 @@ export default function ({ matches }) {
                     <img src="/img/shop-details/details-payment.png" alt="" />
                     <ul>
                       <li>
-                        <span>SKU:</span> 3812912
+                        <span>SKU:</span> {product.sku}
                       </li>
                       <li>
-                        <span>Categories:</span> Clothes
+                        <span>Category:</span>&nbsp;
+                        {product['@expand'].category.name}
                       </li>
                       <li>
-                        <span>Tag:</span> Clothes, Skin, Body
+                        <span>Tag:</span>&nbsp;
+                        {product['@expand'].tags
+                          .map((tag) => tag.name)
+                          .join(',')}
                       </li>
                     </ul>
                   </div>
@@ -202,7 +212,7 @@ export default function ({ matches }) {
                         href="#tabs-6"
                         role="tab"
                       >
-                        Customer Previews(5)
+                        Customer Reviews (5)
                       </a>
                     </li>
                     <li className="nav-item">
