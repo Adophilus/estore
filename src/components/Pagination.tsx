@@ -1,4 +1,4 @@
-import { DOTS, usePagination } from './hooks/usePagination'
+import { DOTS, usePagination } from './hooks/Pagination'
 
 export default function ({ products, onPageChange }) {
   const paginationRange = usePagination({

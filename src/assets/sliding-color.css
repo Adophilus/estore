@@ -1,0 +1,28 @@
+.sliding-color {
+  position: relative;
+}
+
+.sliding-color span {
+  mix-blend-mode: difference;
+}
+
+.sliding-color::before {
+  border: 2px #000 solid;
+  box-sizing: border-box;
+}
+
+.sliding-color::before {
+  background: #fff;
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 0;
+  transition: width 0.3s;
+}
+
+.sliding-color:hover::before {
+  opacity: 1;
+  width: 100%;
+}

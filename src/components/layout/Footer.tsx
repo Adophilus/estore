@@ -1,6 +1,5 @@
 export default function () {
   const fullYear = new Date().getFullYear()
-
   return (
     <footer className="footer">
       <div className="container">
@@ -80,10 +79,11 @@ export default function () {
         <div className="row">
           <div className="col-lg-12 text-center">
             <div className="footer__copyright__text">
-              <p>
-                Copyright © {fullYear}
-                All rights reserved | This template is made with{' '}
-                <i className="fa fa-heart-o" aria-hidden="true"></i> by{' '}
+              <p className="d-flex align-items-center">
+                <span className="mr-auto">Copyright © {fullYear}</span>
+                All rights reserved | This template is made with&nbsp;
+                <i className="fa fa-heart-o" aria-hidden="true"></i>
+                &nbsp;by&nbsp;
                 <a href="https://colorlib.com" target="_blank">
                   Colorlib
                 </a>

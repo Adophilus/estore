@@ -94,7 +94,7 @@ export default function () {
               </Link>
               <Link href="/user/cart">
                 <img src="/img/icon/cart.png" alt="" />{' '}
-                <span>{cart.items}</span>
+                <span>{cart.items.length}</span>
               </Link>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import Pagination from '../components/Pagination'
 import Layout from '../components/layout/Layout'
-import Product from '../components/product/Product'
+import ProductCard from '../components/product/Card'
 import AppContext from '../contexts/App'
 import { route } from 'preact-router'
 import { useContext, useEffect, useRef, useState } from 'preact/hooks'
@@ -321,7 +321,7 @@ export default function () {
                   <div className="row">
                     {products.items.map((product, index) => (
                       <div className="col-lg-4 col-md-6 col-sm-6">
-                        <Product key={index} product={product} />
+                        <ProductCard key={index} product={product} />
                       </div>
                     ))}
                   </div>
