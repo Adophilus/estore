@@ -1,16 +1,13 @@
-import { useEffect, useRef } from 'preact/hooks'
+import AppContext from '../contexts/App'
+import { useContext, useEffect, useRef } from 'preact/hooks'
 
 export default function () {
+  const { pocketBaseClient } = useContext(AppContext)
   const selectRef = useRef()
 
   useEffect(() => {
-    window.jQuery(selectRef.current).niceSelect()
+    console.log(pocketBaseClient)
   }, [])
 
-  return (
-    <select ref={selectRef}>
-      <option>Hello</option>
-      <option>Hi</option>
-    </select>
-  )
+  return <h1>Test</h1>
 }

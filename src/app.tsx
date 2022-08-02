@@ -1,5 +1,6 @@
+import { useCart } from './components/hooks/Cart'
+import { useProvider } from './components/hooks/Provider'
 import AppContext from './contexts/App'
-import { Provider } from './utils'
 import HomeView from './views/Home'
 import LoginView from './views/Login'
 import ProductView from './views/Product'
@@ -18,7 +19,7 @@ export default function () {
   const cart = useCart({ pocketBaseClient, provider })
 
   return (
-    <AppContext.Provider value={{ pocketBaseClient, provider, cart }}>
+    <AppContext.Provider value={{ pocketBaseClient, Provider: provider, cart }}>
       <Router>
         <HomeView path="/" />
         <ShopView path="/shop" />

@@ -2,15 +2,13 @@ import '../assets/pushable.css'
 import '../assets/sliding-color.css'
 import Layout from '../components/layout/Layout'
 import AppContext from '../contexts/App'
-import { Provider } from '../utils'
 import { useContext, useEffect, useRef, useState } from 'preact/hooks'
 
 export default function () {
-  const { pocketBaseClient } = useContext(AppContext)
+  const { pocketBaseClient, Provider } = useContext(AppContext)
   const [loginError, setLoginError] = useState(false)
   let email = useRef()
   let password = useRef()
-  const provider = new Provider()
 
   const loginUser = async () => {
     try {
@@ -23,15 +21,9 @@ export default function () {
   }
 
   const googleOAuth = async () => {
-    const redirectUrl = `${window.location.origin}/auth/google`
-
     try {
-      provider.set(
-        (await pocketBaseClient.Users.listAuthMethods()).authProviders.filter(
-          (provider) => provider.name === 'google'
-        )[0]
-      )
-      window.location.href = provider.provider.authUrl + redirectUrl
+      const provider = await Provider.use('google', '/auth/google')
+      Provider.redirect()
     } catch (err) {
       console.log(err)
     }
