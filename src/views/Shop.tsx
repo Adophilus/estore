@@ -83,7 +83,6 @@ export default function () {
   }
 
   useEffect(() => {
-    $(selectRef.current).niceSelect()
     getDetails()
   }, [])
 
@@ -307,7 +306,7 @@ export default function () {
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6">
                         <div className="shop__product__option__right">
-                          <p>Sort by Price:</p>
+                          <p>Sort by:</p>
                           <select ref={selectRef} className="nice-select">
                             <option value="alphabetical">A-Z</option>
                             <option value="low-to-high">Most Popular</option>

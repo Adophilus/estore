@@ -42,7 +42,7 @@ export default function ({ product }) {
             </a>
           </li>
           <li>
-            <Link href={`/shop/products/${product.slug}`}>
+            <Link href={`/shop/products/${product.id}/${product.slug}`}>
               <img src="/img/icon/search.png" alt="View" />
               <span>View</span>
             </Link>
