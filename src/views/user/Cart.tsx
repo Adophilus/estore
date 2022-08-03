@@ -7,9 +7,7 @@ import { Provider } from '../../utils'
 import { useContext, useEffect } from 'preact/hooks'
 
 export default function () {
-  const { pocketBaseClient } = useContext(AppContext)
-  const cart = useCart(AppContext)
-  console.log(cart.items)
+  const { pocketBaseClient, cart } = useContext(AppContext)
   useEffect(() => cart.getItems(), [])
 
   return (

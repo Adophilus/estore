@@ -15,11 +15,11 @@ import { useEffect, useState } from 'preact/hooks'
 
 export default function () {
   const pocketBaseClient = new PocketBase('http://127.0.0.1:8090')
-  const provider = useProvider({ pocketBaseClient })
-  const cart = useCart({ pocketBaseClient, provider })
+  const Provider = useProvider({ pocketBaseClient })
+  const cart = useCart({ pocketBaseClient, Provider })
 
   return (
-    <AppContext.Provider value={{ pocketBaseClient, Provider: provider, cart }}>
+    <AppContext.Provider value={{ pocketBaseClient, Provider, cart }}>
       <Router>
         <HomeView path="/" />
         <ShopView path="/shop" />

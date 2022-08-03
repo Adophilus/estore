@@ -1030,6 +1030,7 @@ ol {
   top: 22px;
   opacity: 1;
   visibility: visible;
+  cursor: pointer;
 }
 
 .product__item:hover .product__item__text h6 {

@@ -11,7 +11,6 @@ export default function () {
       window.location.href = '/shop'
     } catch (err) {
       console.log(err)
-      console.log(Provider.provider.codeVerifier)
     }
   }
 

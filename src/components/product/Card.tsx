@@ -1,8 +1,23 @@
+import AppContext from '../../contexts/App'
 import { Link } from 'preact-router/match'
-import { useRef } from 'preact/hooks'
+import { useContext, useRef } from 'preact/hooks'
 
 export default function ({ product }) {
   const activeColor = useRef()
+  const { cart } = useContext(AppContext)
+
+  const addToCart = async () => {
+    try {
+      await cart.addItem({
+        product,
+        color: activeColor.current.style.backgroundColor,
+        size: product.sizes[0]
+      })
+      console.log('all done!')
+    } catch (err) {
+      console.log(err.data)
+    }
+  }
 
   return (
     <div className="product__item">
@@ -35,7 +50,7 @@ export default function ({ product }) {
       </div>
       <div className="product__item__text">
         <h6>{product.name}</h6>
-        <a href="#" className="add-cart">
+        <a onClick={() => addToCart()} className="add-cart">
           + Add To Cart
         </a>
         <div className="rating">
@@ -49,6 +64,7 @@ export default function ({ product }) {
         <div className="product__color__select">
           {product.colors.map((color, index) => (
             <label
+              ref={!index ? activeColor : null}
               className={`${index === 0 ? 'active' : ''}`}
               onClick={(e) => {
                 if (activeColor.current)
