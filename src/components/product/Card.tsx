@@ -15,6 +15,7 @@ export default function ({ product }) {
       })
       console.log('all done!')
     } catch (err) {
+      console.log(err)
       console.log(err.data)
     }
   }
