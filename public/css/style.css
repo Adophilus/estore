@@ -116,7 +116,7 @@ ol {
 }
 
 .section-title span {
-  color: #e53637;
+  color: #5605f8;
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
@@ -557,7 +557,7 @@ ol {
   bottom: 0;
   width: 100%;
   height: 2px;
-  background: #e53637;
+  background: #5605f8;
   content: '';
   -webkit-transition: all, 0.5s;
   -o-transition: all, 0.5s;
@@ -739,7 +739,7 @@ ol {
 
 .banner__item:hover .banner__item__text a:after {
   width: 40px;
-  background: #e53637;
+  background: #5605f8;
 }
 
 .banner__item.banner__item--middle {
@@ -878,7 +878,7 @@ ol {
 }
 
 .categories__deal__countdown span {
-  color: #e53637;
+  color: #5605f8;
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
@@ -967,7 +967,7 @@ ol {
 }
 
 .instagram__text h3 {
-  color: #e53637;
+  color: #5605f8;
   font-weight: 700;
 }
 
@@ -1125,7 +1125,7 @@ ol {
 
 .product__item__text a {
   font-size: 15px;
-  color: #e53637;
+  color: #5605f8;
   font-weight: 700;
   position: absolute;
   left: 0;
@@ -2900,7 +2900,7 @@ ol {
 
 .blog__item:hover a::after {
   width: 40px;
-  background: #e53637;
+  background: #5605f8;
 }
 
 .blog__item:hover .blog__item__text {

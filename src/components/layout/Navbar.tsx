@@ -44,9 +44,9 @@ export default function () {
       <div className="container">
         <div className="row">
           <div className="col-lg-3 col-md-3">
-            <div className="header__logo">
+            <div className="header__logo d-flex align-items-center">
               <Link href="/">
-                <img src="/img/logo.png" alt="" />
+                <img className="logo" src="/img/logo-black.png" alt="" />
               </Link>
             </div>
           </div>

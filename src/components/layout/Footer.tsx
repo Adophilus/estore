@@ -8,7 +8,7 @@ export default function () {
             <div className="footer__about">
               <div className="footer__logo">
                 <a href="#">
-                  <img src="/img/footer-logo.png" alt="" />
+                  <img className="logo" src="/img/logo-white.png" alt="" />
                 </a>
               </div>
               <p>
@@ -79,14 +79,19 @@ export default function () {
         <div className="row">
           <div className="col-lg-12 text-center">
             <div className="footer__copyright__text">
-              <p className="d-flex align-items-center">
-                <span className="mr-auto">Copyright © {fullYear}</span>
-                All rights reserved | This template is made with&nbsp;
-                <i className="fa fa-heart-o" aria-hidden="true"></i>
-                &nbsp;by&nbsp;
-                <a href="https://colorlib.com" target="_blank">
-                  Colorlib
-                </a>
+              <p className="d-flex flex-column flex-lg-row justify-content-lg-between align-items-center">
+                <span>
+                  Copyright © {fullYear}
+                  &nbsp;|&nbsp;All rights reserved
+                </span>
+                <span>
+                  Made with&nbsp;
+                  <i className="fa fa-heart-o" aria-hidden="true"></i>
+                  &nbsp;by&nbsp;
+                  <a href="https://colorlib.com" target="_blank">
+                    Colorlib
+                  </a>
+                </span>
               </p>
             </div>
           </div>
