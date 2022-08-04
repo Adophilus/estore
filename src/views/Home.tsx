@@ -5,7 +5,10 @@ export default function () {
     <Layout>
       <section className="hero">
         <div className="hero__slider owl-carousel">
-          <div className="hero__items set-bg" data-setbg="/img/hero/hero-1.jpg">
+          <div
+            className="hero__items set-bg"
+            style="background-image: url('/img/hero/hero-1.jpg')"
+          >
             <div className="container">
               <div className="row">
                 <div className="col-xl-5 col-lg-7 col-md-8">
@@ -39,7 +42,10 @@ export default function () {
               </div>
             </div>
           </div>
-          <div className="hero__items set-bg" data-setbg="/img/hero/hero-2.jpg">
+          <div
+            className="hero__items set-bg"
+            style="background-image: url('/img/hero/hero-2.jpg')"
+          >
             <div className="container">
               <div className="row">
                 <div className="col-xl-5 col-lg-7 col-md-8">
@@ -134,7 +140,7 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="/img/product/product-1.jpg"
+                  style="background-image: url('/img/product/product-1.jpg')"
                 >
                   <span className="label">New</span>
                   <ul className="product__hover">
@@ -187,7 +193,7 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="/img/product/product-2.jpg"
+                  style="background-image: url('/img/product/product-2.jpg')"
                 >
                   <ul className="product__hover">
                     <li>
@@ -239,7 +245,7 @@ export default function () {
               <div className="product__item sale">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="/img/product/product-3.jpg"
+                  style="background-image: url('/img/product/product-3.jpg')"
                 >
                   <span className="label">Sale</span>
                   <ul className="product__hover">
@@ -292,7 +298,7 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="/img/product/product-4.jpg"
+                  style="background-image: url('/img/product/product-4.jpg')"
                 >
                   <ul className="product__hover">
                     <li>
@@ -344,7 +350,7 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="/img/product/product-5.jpg"
+                  style="background-image: url('/img/product/product-5.jpg')"
                 >
                   <ul className="product__hover">
                     <li>
@@ -396,7 +402,7 @@ export default function () {
               <div className="product__item sale">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="/img/product/product-6.jpg"
+                  style="background-image: url('/img/product/product-6.jpg')"
                 >
                   <span className="label">Sale</span>
                   <ul className="product__hover">
@@ -449,7 +455,7 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="/img/product/product-7.jpg"
+                  style="background-image: url('/img/product/product-7.jpg')"
                 >
                   <ul className="product__hover">
                     <li>
@@ -501,7 +507,7 @@ export default function () {
               <div className="product__item">
                 <div
                   className="product__item__pic set-bg"
-                  data-setbg="/img/product/product-8.jpg"
+                  style="background-image: url('/img/product/product-8.jpg')"
                 >
                   <ul className="product__hover">
                     <li>
@@ -614,27 +620,27 @@ export default function () {
               <div className="instagram__pic">
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="/img/instagram/instagram-1.jpg"
+                  style="background-image: url('/img/instagram/instagram-1.jpg')"
                 ></div>
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="/img/instagram/instagram-2.jpg"
+                  style="background-image: url('/img/instagram/instagram-2.jpg')"
                 ></div>
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="/img/instagram/instagram-3.jpg"
+                  style="background-image: url('/img/instagram/instagram-3.jpg')"
                 ></div>
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="/img/instagram/instagram-4.jpg"
+                  style="background-image: url('/img/instagram/instagram-4.jpg')"
                 ></div>
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="/img/instagram/instagram-5.jpg"
+                  style="background-image: url('/img/instagram/instagram-5.jpg')"
                 ></div>
                 <div
                   className="instagram__pic__item set-bg"
-                  data-setbg="/img/instagram/instagram-6.jpg"
+                  style="background-image: url('/img/instagram/instagram-6.jpg')"
                 ></div>
               </div>
             </div>
@@ -667,7 +673,7 @@ export default function () {
               <div className="blog__item">
                 <div
                   className="blog__item__pic set-bg"
-                  data-setbg="/img/blog/blog-1.jpg"
+                  style="background-image: url('/img/blog/blog-1.jpg')"
                 ></div>
                 <div className="blog__item__text">
                   <span>
@@ -682,7 +688,7 @@ export default function () {
               <div className="blog__item">
                 <div
                   className="blog__item__pic set-bg"
-                  data-setbg="/img/blog/blog-2.jpg"
+                  style="background-image: url('/img/blog/blog-2.jpg')"
                 ></div>
                 <div className="blog__item__text">
                   <span>
@@ -697,7 +703,7 @@ export default function () {
               <div className="blog__item">
                 <div
                   className="blog__item__pic set-bg"
-                  data-setbg="/img/blog/blog-3.jpg"
+                  style="background-image: url('/img/blog/blog-3.jpg')"
                 ></div>
                 <div className="blog__item__text">
                   <span>
