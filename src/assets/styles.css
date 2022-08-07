@@ -1,3 +1,19 @@
+.secondary-btn {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  color: black;
+  background: white;
+  letter-spacing: 4px;
+  border: 0px;
+}
+
+.secondary-btn[disabled] {
+  background-color: #666666;
+}
+
 .shop__form {
   margin-bottom: 45px;
 }

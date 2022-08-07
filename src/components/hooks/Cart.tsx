@@ -29,6 +29,7 @@ export function useCart({ pocketBaseClient, Provider }) {
             owner: pocketBaseClient.AuthStore.model.profile.id
           },
           {
+            $autoCancel: false,
             expand: 'items'
           }
         )
@@ -60,27 +61,55 @@ export function useCart({ pocketBaseClient, Provider }) {
             color,
             size,
             quantity
+          },
+          {
+            $autoCancel: false
+          }
+        )
+        await pocketBaseClient.Records.update(
+          'carts',
+          cart.id,
+          {
+            owner: cart.owner,
+            items: [...items.map((_item) => _item.id), cartItem.id]
+          },
+          {
+            $autoCancel: false
+          }
+        )
+        setItems(
+          items.map((_item) => {
+            if (_item.id === id) return cartItem
+            return _item
+          })
+        )
+      } else {
+        const cartItem = await pocketBaseClient.Records.create(
+          'cart_items',
+          {
+            product: product.id,
+            color,
+            size,
+            quantity
+          },
+
+          {
+            $autoCancel: false
           }
         )
         setItems([...items, cartItem])
-        await pocketBaseClient.Records.update('carts', cart.id, {
-          owner: cart.owner,
-          items: [...items.map((_item) => _item.id), cartItem.id]
-        })
-      } else {
-        const cartItem = await pocketBaseClient.Records.create('cart_items', {
-          product: product.id,
-          color,
-          size,
-          quantity
-        })
-        setItems([...items, cartItem])
-        await pocketBaseClient.Records.update('carts', cart.id, {
-          owner: cart.owner,
-          items: [...items.map((_item) => _item.id), cartItem.id]
-        })
+        await pocketBaseClient.Records.update(
+          'carts',
+          cart.id,
+          {
+            owner: cart.owner,
+            items: [...items.map((_item) => _item.id), cartItem.id]
+          },
+          {
+            $autoCancel: false
+          }
+        )
       }
-      return true
     },
     getItems() {}
   } as ICart
