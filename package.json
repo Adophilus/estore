@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "db:start": "env $(cat .env | xargs) bin/pocketbase serve --dir .data/pb_data --encryptionEnv=POCKETBASE_ENCRYPTION_KEY"
+    "db:start": "env $(cat .env | xargs) bin/pocketbase serve --http 0.0.0.0:8090 --dir .data/pb_data --encryptionEnv=POCKETBASE_ENCRYPTION_KEY"
   },
   "dependencies": {
     "pocketbase": "^0.2.2",

@@ -166,6 +166,13 @@ ol {
   color: #ffffff;
   background: #000000;
   letter-spacing: 4px;
+  border: 0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+}
+
+.primary-btn[disabled] {
+  background: #666666;
 }
 
 .site-btn {
@@ -177,6 +184,7 @@ ol {
   text-transform: uppercase;
   display: inline-block;
   padding: 14px 30px;
+  cursor: pointer;
 }
 
 /* Preloader */
@@ -1031,6 +1039,7 @@ ol {
   opacity: 1;
   visibility: visible;
   cursor: pointer;
+  user-select: none;
 }
 
 .product__item:hover .product__item__text h6 {

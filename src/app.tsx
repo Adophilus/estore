@@ -1,5 +1,6 @@
 import { useCart } from './components/hooks/Cart'
 import { useProvider } from './components/hooks/Provider'
+import config from './config'
 import AppContext from './contexts/App'
 import HomeView from './views/Home'
 import LoginView from './views/Login'
@@ -14,12 +15,12 @@ import { Match } from 'preact-router/match'
 import { useEffect, useState } from 'preact/hooks'
 
 export default function () {
-  const pocketBaseClient = new PocketBase('http://127.0.0.1:8090')
+  const pocketBaseClient = new PocketBase(config.pocketBaseHost)
   const Provider = useProvider({ pocketBaseClient })
   const cart = useCart({ pocketBaseClient, Provider })
 
   return (
-    <AppContext.Provider value={{ pocketBaseClient, Provider, cart }}>
+    <AppContext.Provider value={{ pocketBaseClient, Provider, cart, config }}>
       <Router>
         <HomeView path="/" />
         <ShopView path="/shop" />

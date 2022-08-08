@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'preact/hooks'
 export function useCart({ pocketBaseClient, Provider }) {
   const [items, setItems] = useState([])
   const [cart, setCart] = useState()
+  const [init, setInit] = useState(false)
 
   const initCart = async () => {
     if (pocketBaseClient.AuthStore.isValid) {
@@ -18,10 +19,12 @@ export function useCart({ pocketBaseClient, Provider }) {
         },
         { $autoCancel: false }
       )
+
       if (_carts.items.length) {
         const _cart = _carts.items[0]
-        if (_cart.items.length) setItems(_cart['@expand'].items)
         setCart(_cart)
+        if (_cart.items.length) setItems(_cart['@expand'].items)
+        else setItems([])
       } else {
         const newCart = await pocketBaseClient.Records.create(
           'carts',
@@ -34,16 +37,20 @@ export function useCart({ pocketBaseClient, Provider }) {
           }
         )
         setCart(newCart)
+        setItems([])
       }
     }
+
+    setInit(true)
   }
 
   useEffect(() => {
     initCart()
-  }, [Provider.provider])
+  }, [])
 
   return {
     items,
+    init,
     async updateItem({ product, color, size, quantity = 1 }: IProductVariant) {
       if (quantity <= 0) {
         return await this.deleteItem({ product, color, size, quantity })
