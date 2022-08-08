@@ -19,10 +19,11 @@ export default function () {
               <div className="header__top__right">
                 <div className="header__top__links">
                   <Link href="/login">
-                    <i class="fa fa-user" aria-hidden="true"></i>&nbsp; Sign in
+                    <i className="fa fa-user" aria-hidden="true"></i>&nbsp; Sign
+                    in
                   </Link>
                   <a href="/faqs">
-                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <i className="fa fa-question-circle" aria-hidden="true"></i>
                     &nbsp; FAQs
                   </a>
                 </div>

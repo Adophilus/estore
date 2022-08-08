@@ -26,7 +26,7 @@ export default function ({ products, onPageChange }) {
           className={`${products.page === 1 ? 'text-muted' : ''}`}
           onClick={() => products.page !== 1 && onPrevious()}
         >
-          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          <i className="fa fa-chevron-left" aria-hidden="true"></i>
         </span>
         {paginationRange.map((pageNumber) => {
           if (pageNumber === DOTS) {
@@ -47,7 +47,7 @@ export default function ({ products, onPageChange }) {
           className={`${products.page === lastPage ? 'text-muted' : ''}`}
           onClick={() => products.page !== lastPage && onNext()}
         >
-          <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          <i className="fa fa-chevron-right" aria-hidden="true"></i>
         </span>
       </div>
     </div>

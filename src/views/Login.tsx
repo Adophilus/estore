@@ -34,13 +34,13 @@ export default function () {
       <section className="d-flex flex-column my-5 align-items-center">
         {loginError && (
           <div
-            class="alert alert-danger alert-dismissible fade show"
+            className="alert alert-danger alert-dismissible fade show"
             role="alert"
           >
             Invalid email and/or password!
             <button
               type="button"
-              class="close"
+              className="close"
               data-dismiss="alert"
               aria-label="Close"
               onClick={() => setLoginError(false)}
@@ -62,7 +62,7 @@ export default function () {
         >
           <div className="py-3">
             <h2
-              class="text-center"
+              className="text-center"
               style={{
                 fontFamily: 'Volkhov',
                 textTransform: 'uppercase',
@@ -74,7 +74,7 @@ export default function () {
           </div>
           <div>
             <div className="form__control mb-3">
-              <i class="fa fa-user px-3" aria-hidden="true"></i>
+              <i className="fa fa-user px-3" aria-hidden="true"></i>
               <input
                 type="email"
                 onChange={(e) => (email.current = e.target.value)}
@@ -82,7 +82,7 @@ export default function () {
               />
             </div>
             <div className="form__control mb-3">
-              <i class="fa fa-lock px-3" aria-hidden="true"></i>
+              <i className="fa fa-lock px-3" aria-hidden="true"></i>
               <input
                 type="password"
                 onChange={(e) => (password.current = e.target.value)}
@@ -96,14 +96,14 @@ export default function () {
             </div>
             <div>
               <button
-                class="pushable w-100"
+                className="pushable w-100"
                 type="button"
                 onClick={() => googleOAuth()}
               >
-                <span class="shadow"></span>
-                <span class="edge"></span>
-                <span class="front py-2">
-                  <i class="fa fa-google text-light" aria-hidden="true"></i>
+                <span className="shadow"></span>
+                <span className="edge"></span>
+                <span className="front py-2">
+                  <i className="fa fa-google text-light" aria-hidden="true"></i>
                   &nbsp; Continue with Google
                 </span>
               </button>

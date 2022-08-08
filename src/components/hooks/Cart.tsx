@@ -44,7 +44,11 @@ export function useCart({ pocketBaseClient, Provider }) {
 
   return {
     items,
-    async addItem({ product, color, size, quantity = 1 }: IProductVariant) {
+    async updateItem({ product, color, size, quantity = 1 }: IProductVariant) {
+      if (quantity <= 0) {
+        return await this.deleteItem({ product, color, size, quantity })
+      }
+
       let cartItem = items.filter(
         (_cartItem) =>
           _cartItem.product === product.id &&
@@ -79,7 +83,7 @@ export function useCart({ pocketBaseClient, Provider }) {
         )
         setItems(
           items.map((_item) => {
-            if (_item.id === id) return cartItem
+            if (_item.id === cartItem.id) return cartItem
             return _item
           })
         )
@@ -110,6 +114,31 @@ export function useCart({ pocketBaseClient, Provider }) {
           }
         )
       }
+    },
+    async deleteItem({ product, color, size, quantity = 1 }: IProductVariant) {
+      const cartItemId = items.filter(
+        (_cartItem) =>
+          _cartItem.product === product.id &&
+          _cartItem.color === color &&
+          _cartItem.size === size
+      )[0].id
+      await pocketBaseClient.Records.update(
+        'carts',
+        cart.id,
+        {
+          owner: cart.owner,
+          items: items
+            .map((_item) => _item.id)
+            .filter((_item) => _item.id !== cartItemId)
+        },
+        {
+          $autoCancel: false
+        }
+      )
+      await pocketBaseClient.Records.delete('cart_items', cartItemId, {
+        $autoCancel: false
+      })
+      setItems(items.filter((_item) => _item.id !== cartItemId))
     },
     getItems() {}
   } as ICart

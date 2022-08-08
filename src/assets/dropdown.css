@@ -1,0 +1,81 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.dropdown > button {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  text-decoration: none;
+  transition-duration: 0.3s;
+}
+
+.dropdown > button:hover {
+  background-color: #efefef;
+}
+
+.dropdown input[type='checkbox'] {
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  opacity: 0;
+}
+
+.dropdown input[type='checkbox']:checked {
+  position: fixed;
+  z-index: +0;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.dropdown ul {
+  position: absolute;
+  top: 90%;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  right: 0;
+  list-style: none;
+  padding: 4px 0px;
+  opacity: 0;
+  display: none;
+  background-color: white;
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.175);
+  z-index: 999;
+}
+
+.dropdown input[type='checkbox']:checked + ul {
+  opacity: 1;
+  display: block;
+}
+
+.dropdown ul li {
+  display: block;
+  padding: 6px 20px;
+  white-space: nowrap;
+  transition-duration: 0.2s;
+  transition-property: background-color;
+}
+
+.dropdown ul li:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.dropdown ul li a {
+  text-decoration: none;
+  display: block;
+  color: black;
+}

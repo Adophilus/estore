@@ -8,12 +8,11 @@ export default function ({ product }) {
 
   const addToCart = async () => {
     try {
-      await cart.addItem({
+      await cart.updateItem({
         product,
         color: activeColor.current.style.backgroundColor,
         size: product.sizes[0]
       })
-      console.log('all done!')
     } catch (err) {
       console.log(err)
       console.log(err.data)

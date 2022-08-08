@@ -334,7 +334,7 @@ export default function () {
               ) : (
                 <div className="d-flex flex-column align-items-center py-3">
                   <i
-                    class="fa fa-archive text-muted"
+                    className="fa fa-archive text-muted"
                     aria-hidden="true"
                     style="font-size: 4rem"
                   ></i>
