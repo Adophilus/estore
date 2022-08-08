@@ -108,10 +108,14 @@ export default function () {
                   return (
                     <div className="cart__item row mt-3">
                       <div className="cart__item__image">
-                        <img
-                          style="max-width: 100px"
-                          src={`${config.pocketBaseHost}/api/files/${item['@expand'].product['@expand'].cover['@collectionId']}/${item['@expand'].product['@expand'].cover.id}/${item['@expand'].product['@expand'].cover.image}`}
-                        />
+                        <Link
+                          href={`/shop/products/${item['@expand'].product.slug}`}
+                        >
+                          <img
+                            style="max-width: 100px"
+                            src={`${config.pocketBaseHost}/api/files/${item['@expand'].product['@expand'].cover['@collectionId']}/${item['@expand'].product['@expand'].cover.id}/${item['@expand'].product['@expand'].cover.image}`}
+                          />
+                        </Link>
                       </div>
                       <div className="cart__item__desc col d-flex flex-column justify-content-center">
                         <div
