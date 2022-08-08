@@ -1,4 +1,5 @@
 import AppContext from '../../contexts/App'
+import CartIndicator from '../cart/Indicator'
 import { Link } from 'preact-router/match'
 import { useContext } from 'preact/hooks'
 
@@ -94,13 +95,18 @@ export default function () {
                 <img src="/img/icon/heart.png" alt="" />
               </Link>
               <Link href="/user/cart">
-                <img src="/img/icon/cart.png" alt="" />{' '}
-                <span>{cart.items.length}</span>
+                <CartIndicator cart={cart} />
               </Link>
             </div>
           </div>
         </div>
-        <div className="canvas__open">
+        <div
+          className="canvas__open"
+          onClick={() => {
+            $('.offcanvas-menu-wrapper').addClass('active')
+            $('.offcanvas-menu-overlay').addClass('active')
+          }}
+        >
           <i className="fa fa-bars"></i>
         </div>
       </div>

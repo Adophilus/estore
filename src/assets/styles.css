@@ -1,3 +1,7 @@
+.search-switch {
+  cursor: pointer;
+}
+
 .secondary-btn {
   display: inline-block;
   font-size: 13px;

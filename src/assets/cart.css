@@ -28,6 +28,7 @@
   min-width: 30px;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  user-select: none;
 }
 
 .cart__item .cart__item__desc .cart__item__color {
@@ -65,13 +66,17 @@
 .cart__item .cart__item__quantity__btn {
   user-select: none;
   background-color: #efefef;
-  border-radius: 10px;
-  padding: 5px 10px;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   color: #5605f8;
   font-weight: bolder;
   cursor: pointer;
   border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cart__checkout__section {
@@ -94,4 +99,14 @@
 
 .cart__disclaimer {
   font-size: 0.8em;
+}
+
+.t__and__c {
+  color: #5605f8;
+  transition-duration: 0.2s;
+}
+
+.t__and__c:hover {
+  color: #5605f8;
+  text-decoration: underline;
 }

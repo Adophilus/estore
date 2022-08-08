@@ -164,28 +164,26 @@ export default function () {
                             />
                           </header>
                           <div className="d-flex align-items-center">
-                            <div>
-                              <span className="cart__item__size">
-                                {item['@expand'].size.name}
-                              </span>
-                              <p className="leader d-inline ml-2">
-                                <span className="mr-1">Color:</span>
-                                <span
-                                  className="cart__item__color"
-                                  style={{ backgroundColor: item.color }}
-                                ></span>
-                              </p>
-                            </div>
+                            <span className="cart__item__size">
+                              {item['@expand'].size.name}
+                            </span>
+                            <span className="d-flex align-items-center ml-2">
+                              <span className="mr-1">Color:</span>
+                              <span
+                                className="cart__item__color"
+                                style={{ backgroundColor: item.color }}
+                              ></span>
+                            </span>
                           </div>
-                          <div className="d-flex justify-content-between align-items-center">
-                            <header className="h5 mb-0 fw-bolder">
+                          <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center">
+                            <header className="h5 fw-bolder align-self-start align-self-sm-center">
                               $
                               {(
                                 item['@expand'].product.price * item.quantity
                               ).toFixed(2)}
                             </header>
                             <div
-                              className="cart__item__qty d-flex align-items-center justify-content-center"
+                              className="cart__item__qty d-flex align-self-end align-items-center justify-content-center"
                               style={{ columnGap: '20px' }}
                             >
                               <button
@@ -233,8 +231,10 @@ export default function () {
                   className="form-check-label"
                   for="agreeToTermsAndConditions"
                 >
-                  I agree to &nbsp;
-                  <Link href="/termsandconditions">Terms & Conditions</Link>
+                  I agree to&nbsp;
+                  <Link className="t__and__c" href="/termsandconditions">
+                    Terms & Conditions
+                  </Link>
                 </label>
               </div>
 
@@ -286,7 +286,7 @@ export default function () {
                   className="form-check-label"
                   for="agreeToTermsAndConditions"
                 >
-                  I agree to
+                  I agree to&nbsp;
                   <Link href="/termsandconditions">Terms & Conditions</Link>
                 </label>
               </div>
