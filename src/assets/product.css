@@ -6,3 +6,15 @@
   background-color: white;
   border: 1px solid black;
 }
+
+.product__hover .tab {
+  cursor: pointer;
+}
+
+.product__hover .tab i {
+  color: black;
+}
+
+.product__hover .tab:hover i {
+  color: black;
+}

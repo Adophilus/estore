@@ -4,7 +4,7 @@ import { useContext, useRef } from 'preact/hooks'
 
 export default function ({ product }) {
   const activeColor = useRef()
-  const { cart, config } = useContext(AppContext)
+  const { cart, favourites, config } = useContext(AppContext)
 
   const addToCart = async () => {
     try {
@@ -29,9 +29,24 @@ export default function ({ product }) {
       >
         <ul className="product__hover">
           <li>
-            <a href="#">
-              <img src="/img/icon/heart.png" alt="Favourite" />
-              <span>Favourite</span>
+            <a
+              className="tab"
+              onClick={() =>
+                (favourites.hasProduct(product) &&
+                  favourites.removeProduct(product)) ||
+                favourites.addProduct(product)
+              }
+            >
+              <i
+                className={`fa ${
+                  favourites.hasProduct(product) ? 'fa-heart' : 'fa-heart-o'
+                }`}
+                aria-hidden="true"
+              ></i>
+              <span>
+                {(favourites.hasProduct(product) && 'Unfavourite') ||
+                  'Favourite'}
+              </span>
             </a>
           </li>
           <li>

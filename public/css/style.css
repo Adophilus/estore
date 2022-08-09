@@ -1097,7 +1097,8 @@ ol {
   padding: 4px 10px;
   font-size: 12px;
   position: absolute;
-  left: -78px;
+  /*left: -78px;*/
+  right: calc(100% + 15px);
   top: 5px;
   z-index: 1;
   opacity: 0;
@@ -1121,7 +1122,8 @@ ol {
   z-index: -1;
 }
 
-.product__item__pic .product__hover li img {
+.product__item__pic .product__hover li img,
+.product__item__pic .product__hover li i {
   background: #ffffff;
   padding: 10px;
   display: inline-block;

@@ -10,6 +10,7 @@ import ShopView from './views/Shop'
 import TestView from './views/Test'
 import AuthGoogle from './views/auth/Google'
 import UserCartView from './views/user/Cart'
+import UserFavouritesView from './views/user/Favourites'
 import PocketBase from 'pocketbase'
 import Router from 'preact-router'
 import { Match } from 'preact-router/match'
@@ -33,6 +34,7 @@ export default function () {
         <TestView path="/test" />
         <AuthGoogle path="/auth/google" />
         <UserCartView path="/user/cart" />
+        <UserFavouritesView path="/user/favourites" />
         <div default>
           404
           <br />
