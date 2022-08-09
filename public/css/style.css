@@ -1894,7 +1894,8 @@ ol {
 .product__details__cart__option .quantity .pro-qty {
   width: 100px;
   height: 40px;
-  border: 1px solid #e5e5e5;
+  /*border: 1px solid #e5e5e5;*/
+  border: 1px solid black;
   position: relative;
 }
 

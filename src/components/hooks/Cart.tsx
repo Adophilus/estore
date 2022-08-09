@@ -147,6 +147,14 @@ export function useCart({ pocketBaseClient, Provider }) {
       })
       setItems(items.filter((_item) => _item.id !== cartItemId))
     },
+    hasItem({ product, color, size }: IProductVariant) {
+      return items.filter(
+        (_cartItem) =>
+          _cartItem.product === product.id &&
+          _cartItem.color === color &&
+          _cartItem.size === size
+      )[0]
+    },
     getItems() {}
   } as ICart
 }

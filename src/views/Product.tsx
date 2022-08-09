@@ -1,3 +1,4 @@
+import '../assets/product.css'
 import Layout from '../components/layout/Layout'
 import ProductPrice from '../components/product/Price'
 import AppContext from '../contexts/App'
@@ -6,11 +7,13 @@ import { useContext, useEffect, useRef, useState } from 'preact/hooks'
 
 export default function ({ matches }) {
   const { slug } = matches
-  const { pocketBaseClient } = useContext(AppContext)
+  const { pocketBaseClient, cart, config } = useContext(AppContext)
   const [product, setProduct] = useState(null)
   const [tabImage, setTabImage] = useState(null)
   const currentSize = useRef()
   const currentColor = useRef()
+  const [currentQuantity, setCurrentQuantity] = useState(1)
+  const [inCart, setInCart] = useState(false)
 
   const getProduct = async () => {
     const res = await pocketBaseClient.Records.getList('products', 1, 1, {
@@ -21,9 +24,73 @@ export default function ({ matches }) {
     setProduct(res.items[0])
   }
 
+  const isInCart = () => {
+    const color = currentColor.current.getAttribute('_color')
+    const size = currentSize.current.getAttribute('_size')
+    const _inCart = cart.hasItem({
+      product,
+      color,
+      size
+    })
+    setInCart(_inCart)
+    if (_inCart) {
+      setCurrentQuantity(_inCart.quantity)
+      return _inCart
+    }
+    setCurrentQuantity(1)
+    return _inCart
+  }
+
+  const addToCart = async () => {
+    const color = currentColor.current.getAttribute('_color')
+    const size = currentSize.current.getAttribute('_size')
+    await cart.updateItem({
+      product,
+      color,
+      size,
+      currentQuantity
+    })
+  }
+
+  const decreaseItem = async (index) => {
+    const color = currentColor.current.getAttribute('_color')
+    const size = currentSize.current.getAttribute('_size')
+
+    await cart.updateItem(
+      {
+        product: product,
+        color: color,
+        size: size,
+        quantity: currentQuantity - 1
+      },
+      { $autoCancel: false }
+    )
+  }
+
+  const increaseItem = async (index) => {
+    const color = currentColor.current.getAttribute('_color')
+    const size = currentSize.current.getAttribute('_size')
+
+    await cart.updateItem(
+      {
+        product: product,
+        color: color,
+        size: size,
+        quantity: currentQuantity + 1
+      },
+      { $autoCancel: false }
+    )
+  }
+
+  useEffect(() => {
+    if (product) {
+      isInCart()
+    }
+  }, [cart.items, product])
+
   useEffect(() => {
     getProduct()
-  }, [])
+  }, [cart.init])
 
   if (product === null)
     return (
@@ -61,7 +128,7 @@ export default function ({ matches }) {
                       >
                         <div
                           className="product__thumb__pic set-bg"
-                          style={`background-image: url('http://localhost:8090/api/files/${image['@collectionId']}/${image.id}/${image.image}')`}
+                          style={`background-image: url('${config.pocketBaseHost}/api/files/${image['@collectionId']}/${image.id}/${image.image}')`}
                         ></div>
                       </a>
                     </li>
@@ -73,7 +140,7 @@ export default function ({ matches }) {
                   <div className="tab-pane active" id="tabs-1" role="tabpanel">
                     <div className="product__details__pic__item">
                       <img
-                        src={`http://localhost:8090/api/files/${tabImage['@collectionId']}/${tabImage.id}/${tabImage.image}`}
+                        src={`${config.pocketBaseHost}/api/files/${tabImage['@collectionId']}/${tabImage.id}/${tabImage.image}`}
                         alt=""
                       />
                     </div>
@@ -109,55 +176,100 @@ export default function ({ matches }) {
                   <div className="product__details__option">
                     <div className="product__details__option__size">
                       <span>Size:</span>
-                      {product['@expand'].sizes.map((size) => (
-                        <label
-                          onClick={(e) => {
-                            if (currentSize.current === e.target) return
-                            if (!currentSize.current) {
+                      {product['@expand'].sizes.map((size, index) => {
+                        let props = {}
+                        if (!index) props.ref = currentSize
+                        return (
+                          <label
+                            _size={size.id}
+                            onClick={(e) => {
+                              if (currentSize.current === e.target) return
+                              if (!currentSize.current) {
+                                currentSize.current = e.target
+                                currentSize.current.classList.add('active')
+                                return
+                              }
+                              currentSize.current.classList.remove('active')
                               currentSize.current = e.target
                               currentSize.current.classList.add('active')
-                              return
-                            }
-                            currentSize.current.classList.remove('active')
-                            currentSize.current = e.target
-                            currentSize.current.classList.add('active')
-                          }}
-                        >
-                          {size.name}
-                        </label>
-                      ))}
+                              isInCart()
+                            }}
+                            className={`${!index ? 'active' : ''}`}
+                            {...props}
+                          >
+                            {size.name}
+                          </label>
+                        )
+                      })}
                     </div>
                     <div className="product__details__option__color">
                       <span>Color:</span>
-                      {product.colors.map((color) => (
-                        <label
-                          onClick={(e) => {
-                            if (currentColor.current === e.target) return
-                            if (!currentColor.current) {
+                      {product.colors.map((color, index) => {
+                        let props = {}
+                        if (!index) props.ref = currentColor
+
+                        return (
+                          <label
+                            _color={color}
+                            onClick={(e) => {
+                              if (currentColor.current === e.target) return
+                              if (!currentColor.current) {
+                                currentColor.current = e.target
+                                currentColor.current.classList.add('active')
+                                return
+                              }
+                              currentColor.current.classList.remove('active')
                               currentColor.current = e.target
                               currentColor.current.classList.add('active')
-                              return
-                            }
-                            currentColor.current.classList.remove('active')
-                            currentColor.current = e.target
-                            currentColor.current.classList.add('active')
-                          }}
-                          style={{
-                            backgroundColor: color
-                          }}
-                        ></label>
-                      ))}
+                            }}
+                            style={{
+                              backgroundColor: color
+                            }}
+                            className={`${!index ? 'active' : ''}`}
+                            {...props}
+                          ></label>
+                        )
+                      })}
                     </div>
                   </div>
                   <div className="product__details__cart__option">
+                    {inCart && (
+                      <button
+                        type="button"
+                        onClick={() => decreaseItem()}
+                        className="product__qty__btn h4"
+                        style="margin-right: 20px"
+                      >
+                        -
+                      </button>
+                    )}
                     <div className="quantity">
                       <div className="pro-qty">
-                        <input type="text" value="1" />
+                        <input
+                          type="text"
+                          onChange={(e) => setCurrentQuantity(e.target.value)}
+                          value={currentQuantity}
+                        />
                       </div>
                     </div>
-                    <a href="#" className="primary-btn">
-                      add to cart
-                    </a>
+                    {inCart && (
+                      <button
+                        type="button"
+                        onClick={() => increaseItem()}
+                        className="product__qty__btn h4"
+                      >
+                        +
+                      </button>
+                    )}
+                    {!inCart && (
+                      <a
+                        onClick={() => addToCart()}
+                        style="color: #ffffff"
+                        className="primary-btn"
+                      >
+                        add to cart
+                      </a>
+                    )}
                   </div>
                   <div className="product__details__btns__option">
                     <a href="#">
