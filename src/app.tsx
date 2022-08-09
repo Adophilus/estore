@@ -1,4 +1,5 @@
 import { useCart } from './components/hooks/Cart'
+import { useFavourites } from './components/hooks/Favourites'
 import { useProvider } from './components/hooks/Provider'
 import config from './config'
 import AppContext from './contexts/App'
@@ -18,9 +19,12 @@ export default function () {
   const pocketBaseClient = new PocketBase(config.pocketBaseHost)
   const Provider = useProvider({ pocketBaseClient })
   const cart = useCart({ pocketBaseClient, Provider })
+  const favourites = useFavourites({ pocketBaseClient })
 
   return (
-    <AppContext.Provider value={{ pocketBaseClient, Provider, cart, config }}>
+    <AppContext.Provider
+      value={{ pocketBaseClient, Provider, cart, favourites, config }}
+    >
       <Router>
         <HomeView path="/" />
         <ShopView path="/shop" />

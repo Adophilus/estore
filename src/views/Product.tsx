@@ -1,3 +1,4 @@
+import '../assets/favourites.css'
 import '../assets/product.css'
 import Layout from '../components/layout/Layout'
 import ProductPrice from '../components/product/Price'
@@ -7,7 +8,7 @@ import { useContext, useEffect, useRef, useState } from 'preact/hooks'
 
 export default function ({ matches }) {
   const { slug } = matches
-  const { pocketBaseClient, cart, config } = useContext(AppContext)
+  const { pocketBaseClient, cart, favourites, config } = useContext(AppContext)
   const [product, setProduct] = useState(null)
   const [tabImage, setTabImage] = useState(null)
   const currentSize = useRef()
@@ -113,6 +114,23 @@ export default function ({ matches }) {
                   <span>{product.name}</span>
                 </div>
               </div>
+            </div>
+            <div className="row">
+              <button
+                onClick={() =>
+                  (favourites.hasProduct(product) &&
+                    favourites.removeProduct(product)) ||
+                  favourites.addProduct(product)
+                }
+                className="favourite__button h3 ml-auto"
+              >
+                <i
+                  className={`fa ${
+                    favourites.hasProduct(product) ? 'fa-heart' : 'fa-heart-o'
+                  }`}
+                  aria-hidden="true"
+                ></i>
+              </button>
             </div>
             <div className="row">
               <div className="col-lg-3 col-md-3">
