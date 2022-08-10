@@ -289,14 +289,7 @@ export default function ({ matches }) {
                       </a>
                     )}
                   </div>
-                  <div className="product__details__btns__option">
-                    <a href="#">
-                      <i className="fa fa-heart"></i> add to wishlist
-                    </a>
-                    <a href="#">
-                      <i className="fa fa-exchange"></i> Add To Compare
-                    </a>
-                  </div>
+
                   <div className="product__details__last__option">
                     <h5>
                       <span>Guaranteed Safe Checkout</span>
