@@ -1,3 +1,3 @@
 export default {
-  pocketBaseHost: `http://${window.location.hostname}:8090`
+  pocketBaseHost: import.meta.env.VITE_POCKETBASE_HOST
 }
