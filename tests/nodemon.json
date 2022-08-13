@@ -1,0 +1,5 @@
+{
+  "watch": ["build"],
+  "ext": "ts",
+  "exec": "pnpm backend:test"
+}

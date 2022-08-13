@@ -9,7 +9,7 @@ export default defineConfig(({ command, mode }) => {
     plugins: [preact()],
     server: {
       proxy: {
-        '/api': env.VITE_SERVER_HOST
+        '/api': `${env.VITE_SERVER_BASE_URL}/api`
       }
     }
   }

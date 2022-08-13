@@ -1,13 +1,13 @@
 import ProductApiController from './controllers/Product.js'
 import { Server } from '@overnightjs/core'
-import { config } from 'dotenv'
+import * as dotenv from 'dotenv'
 import PocketBase from 'pocketbase'
 import { Logger } from 'tslog'
 
-class EStoreServer extends Server {
+export default class EStoreServer extends Server {
   private readonly SERVER_START_MSG = 'Server running on port: '
   private logger: Logger
-  private pocketBaseClient: PocketBase
+  private pocketBase: PocketBase
 
   constructor() {
     super()
@@ -19,12 +19,15 @@ class EStoreServer extends Server {
 
   public setupConfig() {
     this.logger = new Logger({ name: 'EStore' })
-    this.pocketBaseClient = new PocketBase(process.env.POCKETBASE_HOST)
+    this.pocketBase = new PocketBase(process.env.POCKETBASE_URL)
+    const adminCreds = process.env.POCKETBASE_ADMIN.split(':')
+
+    this.pocketBase.Admins.authViaEmail(adminCreds[0], adminCreds[1])
   }
 
   public setupMiddleWare() {
     this.app.use((req, res, next) => {
-      res.locals.pocketBaseClient = this.pocketBaseClient
+      res.locals.pocketBase = this.pocketBase
       res.locals.logger = this.logger
       next()
     })
@@ -43,6 +46,6 @@ class EStoreServer extends Server {
   }
 }
 
-config()
+dotenv.config()
 
-new EStoreServer().start(parseInt(process.env.PORT))
+new EStoreServer().start(parseInt(process.env.SERVER_PORT))
