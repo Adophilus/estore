@@ -18,7 +18,7 @@ export default class {
         product.onSale &&
         Date.now() <
           product['@expand'].stats.sale.started +
-            product['@expand'].stats.sale.duration
+            product['@expand'].stats.sale.duration * 1000
       ) {
         res.locals.logger.info(
           `Product(id=${productId}) sale is currently going on!`
@@ -32,6 +32,7 @@ export default class {
       ) {
         product['@expand'].stats.sale.counter++
         product.onSale = false
+        res.locals.logger.info(`updating counter of Product(id=${productId})`)
         await res.locals.pocketBase.Records.update(
           'products',
           productId,
@@ -42,13 +43,15 @@ export default class {
           product['@expand'].stats.id,
           product['@expand'].stats
         )
-        res.locals.logger.info(`updating counter of Product(id=${productId})`)
         return res.status(StatusCodes.OK).end()
       }
 
       product.onSale = true
       product['@expand'].stats.sale.counter = 0
       product['@expand'].stats.sale.started = Date.now()
+      res.locals.logger.info(
+        `setting random discount for Product(id=${productId})`
+      )
       product['@expand'].stats.discount.active = Math.floor(
         Math.random() *
           (product['@expand'].stats.discount.max -
@@ -58,7 +61,7 @@ export default class {
       )
 
       res.locals.logger.info(
-        `setting random discount for Product(id=${productId})`
+        `setting discount of ${product['@expand'].stats.discount.active}% on Product(id=${productId})`
       )
       await res.locals.pocketBase.Records.update('products', productId, product)
       await res.locals.pocketBase.Records.update(

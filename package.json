@@ -6,7 +6,7 @@
   "scripts": {
     "start-all": "bin/start-all.sh",
     "dev": "vite --port 3000",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --outDir build",
     "preview": "vite preview",
     "format:watch": "cd .scripts && pnpm format:watch ..",
     "db:start": "env $(cat .env | xargs) bin/pocketbase serve --http 0.0.0.0:8090 --dir .data/pb_data --encryptionEnv=POCKETBASE_ENCRYPTION_KEY",
