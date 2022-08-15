@@ -89,6 +89,12 @@ export default function ({ matches }) {
     }
   }, [cart.items, product])
 
+useEffect(() => {
+  if (product) {
+  fetch(`${config.backendUrl}/api/products/analytics/${product.id}`).then(res => res.text()).then(data => console.log(data))
+}
+}, [product])
+
   useEffect(() => {
     getProduct()
   }, [cart.init])

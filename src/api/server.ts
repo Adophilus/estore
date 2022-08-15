@@ -1,5 +1,6 @@
 import ProductApiController from './controllers/Product.js'
 import { Server } from '@overnightjs/core'
+import cors from 'cors'
 import * as dotenv from 'dotenv'
 import PocketBase from 'pocketbase'
 import { Logger } from 'tslog'
@@ -26,6 +27,7 @@ export default class EStoreServer extends Server {
   }
 
   public setupMiddleWare() {
+    this.app.use(cors())
     this.app.use((req, res, next) => {
       res.locals.pocketBase = this.pocketBase
       res.locals.logger = this.logger
