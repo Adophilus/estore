@@ -14,7 +14,7 @@ export default class EStoreServer extends Server {
     super()
     this.setupConfig()
     this.setupMiddleWare()
-    super.addControllers(new ProductApiController())
+    super.addControllers(new ProductApiController({ logger: this.logger }))
     this.errorPages()
   }
 
@@ -30,7 +30,6 @@ export default class EStoreServer extends Server {
     this.app.use(cors())
     this.app.use((req, res, next) => {
       res.locals.pocketBase = this.pocketBase
-      res.locals.logger = this.logger
       next()
     })
   }

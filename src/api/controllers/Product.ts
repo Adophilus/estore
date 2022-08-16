@@ -1,9 +1,16 @@
 import { Controller, Get } from '@overnightjs/core'
 import { Request, Response } from 'express'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
+import { Logger } from 'tslog'
 
 @Controller('api/products/analytics')
 export default class {
+  logger: Logger
+
+  constructor ({ logger }) {
+    this.logger = logger.getChildLogger({ name: "ProductAPI" })
+  }
+
   @Get(':id')
   private async getProduct(req: Request, res: Response) {
     const { id: productId } = req.params
@@ -20,7 +27,7 @@ export default class {
           product['@expand'].stats.sale.started +
             product['@expand'].stats.sale.duration * 1000
       ) {
-        res.locals.logger.info(
+        this.logger.info(
           `Product(id=${productId}) sale is currently going on!`
         )
         return res.status(StatusCodes.OK).end()
@@ -32,7 +39,7 @@ export default class {
       ) {
         product['@expand'].stats.sale.counter++
         product.onSale = false
-        res.locals.logger.info(`updating counter of Product(id=${productId})`)
+        this.logger.info(`updating counter of Product(id=${productId})`)
         await res.locals.pocketBase.Records.update(
           'products',
           productId,
@@ -49,7 +56,7 @@ export default class {
       product.onSale = true
       product['@expand'].stats.sale.counter = 0
       product['@expand'].stats.sale.started = Date.now()
-      res.locals.logger.info(
+      this.logger.info(
         `setting random discount for Product(id=${productId})`
       )
       product['@expand'].stats.discount.active = Math.floor(
@@ -60,7 +67,7 @@ export default class {
           product['@expand'].stats.discount.min
       )
 
-      res.locals.logger.info(
+      this.logger.info(
         `setting discount of ${product['@expand'].stats.discount.active}% on Product(id=${productId})`
       )
       await res.locals.pocketBase.Records.update('products', productId, product)
@@ -71,7 +78,7 @@ export default class {
       )
       return res.status(StatusCodes.OK).end()
     } catch (err) {
-      res.locals.logger.error(err)
+      this.logger.error(err)
       res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
         .send(ReasonPhrases.INTERNAL_SERVER_ERROR)
