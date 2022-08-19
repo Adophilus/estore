@@ -1,6 +1,7 @@
 import { useCart } from './components/hooks/Cart'
 import { useFavourites } from './components/hooks/Favourites'
 import { useProvider } from './components/hooks/Provider'
+import { useNotifications } from './components/hooks/Notifications'
 import config from './config'
 import AppContext from './contexts/App'
 import HomeView from './views/Home'
@@ -13,14 +14,13 @@ import UserCartView from './views/user/Cart'
 import UserFavouritesView from './views/user/Favourites'
 import PocketBase from 'pocketbase'
 import Router from 'preact-router'
-import { Match } from 'preact-router/match'
-import { useEffect, useState } from 'preact/hooks'
 
 export default function () {
   const pocketBaseClient = new PocketBase(config.pocketBaseHost)
   const Provider = useProvider({ pocketBaseClient })
   const cart = useCart({ pocketBaseClient, Provider })
   const favourites = useFavourites({ pocketBaseClient })
+  const notifications = useNotifications({ pocketBaseClient })
 
   return (
     <AppContext.Provider
