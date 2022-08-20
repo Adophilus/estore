@@ -88,7 +88,7 @@ export default function ({ product }) {
         </div>
         <h5>{product.onSale ? <>
           <small><del>{product.price.toFixed(2)}</del></small>&nbsp;
-          {(product.price * (100 - stats.discount.active)/100).toFixed(2)}
+          {(product.price * (100 - stats.sale.discount)/100).toFixed(2)}
         </>: product.price.toFixed(2)}</h5>
         <div className="product__color__select">
           {product.colors.map((color, index) => (

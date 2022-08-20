@@ -24,7 +24,7 @@ export default function () {
 
   return (
     <AppContext.Provider
-      value={{ pocketBaseClient, Provider, cart, favourites, config }}
+      value={{ pocketBaseClient, Provider, cart, favourites, notifications, config }}
     >
       <Router>
         <HomeView path="/" />
