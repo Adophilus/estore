@@ -1,11 +1,15 @@
-import { useEffect } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 
 export function useNotifications({ pocketBaseClient }) {
+  const [hasPermission, setHasPermission] = useState(
+    Notification.permission === 'granted'
+  )
+
   const checkNotifications = async () => {
     let previousSale
-    if (!localStorage.get('previousSale'))
+    if (!localStorage.getItem('previousSale'))
       previousSale = { id: 0, starting: 0, duration: 0 }
-    else previousSale = JSON.parse(localStorage.get('previousSale'))
+    else previousSale = JSON.parse(localStorage.getItem('previousSale'))
 
     const latestSale = (
       await pocketBaseClient.Records.getList('sales', 1, 1, {
@@ -20,10 +24,12 @@ export function useNotifications({ pocketBaseClient }) {
       Date.now() >= latestSale.starting &&
       Date.now() <= latestSale.starting + latestSale.duration
     ) {
-      localStorage.set('previousSale', JSON.stringify(latestSale))
+      localStorage.setItem('previousSale', JSON.stringify(latestSale))
       new Notification(latestSale.title, {
         body: latestSale.content,
         renotify: true,
+        tag: 'renotify',
+        icon: `${window.location.origin}/favicon.ico`,
         requireInteraction: true,
         vibrate: [200, 100, 200]
       })
@@ -33,6 +39,7 @@ export function useNotifications({ pocketBaseClient }) {
   useEffect(() => {
     // watch the 'sales' table for changes and then trigger checkNotifications
     pocketBaseClient.realtime.subscribe('sales', (e) => {
+      console.log(e)
       if (e.action === 'create' || e.action === 'update') checkNotifications()
     })
     checkNotifications()
@@ -42,6 +49,7 @@ export function useNotifications({ pocketBaseClient }) {
   }, [])
 
   return {
+    hasPermission,
     async requestPermission() {
       if (Notification.permission !== 'granted') {
         const permission = await Notification.requestPermission()
@@ -49,6 +57,7 @@ export function useNotifications({ pocketBaseClient }) {
           alert(
             "Notifications disabled! You won't get updates on upcoming sales"
           )
+        else setHasPermission(true)
       }
     }
   }

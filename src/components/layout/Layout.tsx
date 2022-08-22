@@ -2,6 +2,7 @@ import Banner from './Banner'
 import Footer from './Footer'
 import Navbar from './Navbar'
 import Search from './Search'
+import NotificationWidget  from './NotificationWidget'
 
 export default function ({ children }) {
   return (
@@ -11,6 +12,7 @@ export default function ({ children }) {
       <main>{children}</main>
       <Footer />
       <Search />
+      <NotificationWidget />
     </>
   )
 }
