@@ -9,6 +9,7 @@
 
 .product__hover .tab {
   cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .product__hover .tab i {
@@ -17,4 +18,37 @@
 
 .product__hover .tab:hover i {
   color: black;
+}
+
+.product__item {
+  cursor: pointer;
+  transition: all 0.7s ease-in-out;
+}
+
+.product__item__pic .sale {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  position: absolute;
+  left: 0;
+  top: 20px;
+}
+
+.product__item__pic .sale span {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 15px 2px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.product__item__pic .sale span.notif-black {
+  background-color: black;
+  color: white;
+}
+
+.product__item__pic .sale span.notif-red {
+  color: white;
+  background-color: rgb(219, 21, 7);
 }

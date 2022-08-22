@@ -1,3 +1,5 @@
+import {Link} from 'preact-router/match'
+
 export default function () {
   const fullYear = new Date().getFullYear()
   return (
@@ -25,16 +27,16 @@ export default function () {
               <h6>Shopping</h6>
               <ul>
                 <li>
-                  <a href="#">Clothing Store</a>
+                  <Link href="/shop/sale">Sale</Link>
                 </li>
                 <li>
-                  <a href="#">Trending Shoes</a>
+                  <a href="/shop/trending">Trending</a>
                 </li>
                 <li>
-                  <a href="#">Accessories</a>
+                  <Link href="/shop">Clothing</Link>
                 </li>
                 <li>
-                  <a href="#">Sale</a>
+                  <Link href="/shop?tags=,Accessories">Accessories</Link>
                 </li>
               </ul>
             </div>

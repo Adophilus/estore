@@ -4,7 +4,7 @@ import ProductCard from '../components/product/Card'
 import AppContext from '../contexts/App'
 import { route } from 'preact-router'
 import { useContext, useEffect, useRef, useState } from 'preact/hooks'
-  import {Link} from 'preact-router/match'
+	import {Link} from 'preact-router/match'
 
 export default function () {
   const queryParams = new URLSearchParams(window.location.search)
@@ -44,7 +44,7 @@ export default function () {
   }
 
   const getDetails = async () => {
-    let filter = `name ~ '${search.name}' && price >= ${search.minPrice} && price <= ${search.maxPrice} `
+    let filter = `onSale = true && name ~ '${search.name}' && price >= ${search.minPrice} && price <= ${search.maxPrice} `
     for (let category of search.categories) {
       filter += `&& category.name ~ '${category}' `
     }
@@ -61,7 +61,7 @@ export default function () {
       {
         $autoCancel: false,
         filter,
-        sort: 'name',
+        sort: '-trending',
         expand: 'cover'
       }
     )
@@ -101,10 +101,11 @@ export default function () {
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcrumb__text">
-                <h4>Shop</h4>
+                <h4>Sale</h4>
                 <div className="breadcrumb__links">
                   <Link href="/">Home</Link>
-                  <span>Shop</span>
+                  <Link href="/shop">Shop</Link>
+                  <span>Sale</span>
                 </div>
               </div>
             </div>

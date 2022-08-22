@@ -8,6 +8,8 @@ import HomeView from './views/Home'
 import LoginView from './views/Login'
 import ProductView from './views/Product'
 import ShopView from './views/Shop'
+import TrendingView from './views/Trending'
+import SaleView from './views/Sale'
 import TestView from './views/Test'
 import AuthGoogle from './views/auth/Google'
 import UserCartView from './views/user/Cart'
@@ -29,6 +31,8 @@ export default function () {
       <Router>
         <HomeView path="/" />
         <ShopView path="/shop" />
+        <TrendingView path="/shop/trending" />
+        <SaleView path="/shop/sale" />
         <ProductView path="/shop/products/:slug" />
         <LoginView path="/login" />
         <TestView path="/test" />
