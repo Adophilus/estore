@@ -9,9 +9,9 @@ export default function () {
           <div className="col-lg-3 col-md-6 col-sm-6">
             <div className="footer__about">
               <div className="footer__logo">
-                <a href="#">
+                <Link href="/">
                   <img className="logo" src="/img/logo-white.png" alt="" />
-                </a>
+                </Link>
               </div>
               <p>
                 The customer is at the heart of our unique business model, which

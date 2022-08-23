@@ -1,4 +1,5 @@
-import ProductApiController from './controllers/Product.js';
+import ProductAnalyticsApiController from './controllers/ProductAnalytics.js';
+import ProductShareApiController from './controllers/ProductShare.js';
 import { Server } from '@overnightjs/core';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
@@ -12,7 +13,10 @@ export default class EStoreServer extends Server {
         super();
         this.setupConfig();
         this.setupMiddleWare();
-        super.addControllers(new ProductApiController({ logger: this.logger }));
+        super.addControllers([
+            new ProductAnalyticsApiController({ logger: this.logger }),
+            new ProductShareApiController({ logger: this.logger })
+        ]);
         this.errorPages();
     }
     setupConfig() {
@@ -22,6 +26,8 @@ export default class EStoreServer extends Server {
         this.pocketBase.Admins.authViaEmail(adminCreds[0], adminCreds[1]);
     }
     setupMiddleWare() {
+        this.app.set('views', 'src/api/views');
+        this.app.set('view engine', 'pug');
         this.app.use(cors());
         this.app.use((req, res, next) => {
             res.locals.pocketBase = this.pocketBase;

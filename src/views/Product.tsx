@@ -208,7 +208,7 @@ export default function ({ matches }) {
                           window.open(
                             'https://twitter.com/intent/tweet?' +
                               new URLSearchParams({
-                                text: `Check out the ${product.name}\n${config.backendUrl}/api/products/${product.slug}`
+                                text: `Check out the ${product.name}\n${config.backendUrl}/share/products/${product.slug}`
                               })
                           )
                         }}
