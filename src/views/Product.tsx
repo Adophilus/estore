@@ -89,11 +89,13 @@ export default function ({ matches }) {
     }
   }, [cart.items, product])
 
-useEffect(() => {
-  if (product) {
-  fetch(`${config.backendUrl}/api/products/analytics/${product.id}`).then(res => res.text()).then(data => console.log(data))
-}
-}, [product])
+  useEffect(() => {
+    if (product) {
+      fetch(`${config.backendUrl}/api/products/analytics/${product.id}`)
+        .then((res) => res.text())
+        .then((data) => console.log(data))
+    }
+  }, [product])
 
   useEffect(() => {
     getProduct()
@@ -180,13 +182,46 @@ useEffect(() => {
               <div className="col-lg-8">
                 <div className="product__details__text">
                   <h4>{product.name}</h4>
-                  <div className="rating">
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star-o"></i>
-                    <span> - 5 Reviews</span>
+                  <div
+                    style="column-gap: 10px"
+                    className="d-flex justify-content-center g-2"
+                  >
+                    <div className="rating">
+                      <i className="fa fa-star"></i>
+                      <i className="fa fa-star"></i>
+                      <i className="fa fa-star"></i>
+                      <i className="fa fa-star"></i>
+                      <i className="fa fa-star-o"></i>
+                      <span> - 5 Reviews</span>
+                    </div>
+                    <div className="socials d-flex" style="column-gap: 10px">
+                      <a>
+                        <i
+                          class="fa fa-facebook"
+                          style="color: #4267B2"
+                          aria-hidden="true"
+                        ></i>
+                      </a>
+                      <a
+                        href="javascript:void()"
+                        onClick={() => {
+                          window.open(
+                            'https://twitter.com/intent/tweet?' +
+                              new URLSearchParams({
+                                text: `Check out the ${product.name}\n${config.backendUrl}/api/products/${product.slug}`
+                              })
+                          )
+                        }}
+                        rel="noopener"
+                        target="_blank"
+                      >
+                        <i
+                          class="fa fa-twitter"
+                          style="color: #1da1f2"
+                          aria-hidden="true"
+                        ></i>
+                      </a>
+                    </div>
                   </div>
                   <h3>
                     <ProductPrice product={product} />
