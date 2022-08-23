@@ -1,4 +1,4 @@
-import {Link} from 'preact-router/match'
+import { Link } from 'preact-router/match'
 
 export default function () {
   const fullYear = new Date().getFullYear()

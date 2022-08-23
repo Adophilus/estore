@@ -1,16 +1,16 @@
 import { useCart } from './components/hooks/Cart'
 import { useFavourites } from './components/hooks/Favourites'
-import { useProvider } from './components/hooks/Provider'
 import { useNotifications } from './components/hooks/Notifications'
+import { useProvider } from './components/hooks/Provider'
 import config from './config'
 import AppContext from './contexts/App'
 import HomeView from './views/Home'
 import LoginView from './views/Login'
 import ProductView from './views/Product'
-import ShopView from './views/Shop'
-import TrendingView from './views/Trending'
 import SaleView from './views/Sale'
+import ShopView from './views/Shop'
 import TestView from './views/Test'
+import TrendingView from './views/Trending'
 import AuthGoogle from './views/auth/Google'
 import UserCartView from './views/user/Cart'
 import UserFavouritesView from './views/user/Favourites'
@@ -26,7 +26,14 @@ export default function () {
 
   return (
     <AppContext.Provider
-      value={{ pocketBaseClient, Provider, cart, favourites, notifications, config }}
+      value={{
+        pocketBaseClient,
+        Provider,
+        cart,
+        favourites,
+        notifications,
+        config
+      }}
     >
       <Router>
         <HomeView path="/" />

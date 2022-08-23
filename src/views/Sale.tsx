@@ -3,8 +3,8 @@ import Layout from '../components/layout/Layout'
 import ProductCard from '../components/product/Card'
 import AppContext from '../contexts/App'
 import { route } from 'preact-router'
+import { Link } from 'preact-router/match'
 import { useContext, useEffect, useRef, useState } from 'preact/hooks'
-	import {Link} from 'preact-router/match'
 
 export default function () {
   const queryParams = new URLSearchParams(window.location.search)
