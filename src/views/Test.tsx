@@ -5,16 +5,10 @@ export default function () {
   const { pocketBaseClient } = useContext(AppContext)
 
   const test = async () => {
-    const productsList = await pocketBaseClient.Records.getList(
-      'products',
-      1,
-      10,
-      {
-        expand: 'stats',
-        sort: '+stats.trending'
-      }
-    )
-    console.log(productsList.items)
+    const product = (await pocketBaseClient.Records.getList('products', 1, 1))
+      .items[0]
+    const url = await pocketBaseClient.Records.getFileUrl(product, product.id)
+    console.log(url)
   }
 
   useEffect(() => {

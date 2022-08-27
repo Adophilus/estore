@@ -37,7 +37,7 @@ export default function ({ product }) {
         <div
           className="product__item__pic set-bg"
           style={{
-            backgroundImage: `url('${config.pocketBaseHost}/api/files/${product['@expand'].cover['@collectionId']}/${product['@expand'].cover.id}/${product['@expand'].cover.image}')`
+            backgroundImage: `url('${config.pocketBaseHost}/api/files/${product['@expand'].cover['@collectionId']}/${product['@expand'].cover.id}/${product['@expand'].cover.image}?thumb=200x200')`
           }}
         >
           {product.onSale && (
