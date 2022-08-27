@@ -36,14 +36,6 @@ describe('Product sale', () => {
 
   test('that the sale has been created', async () => {
     const res = await agent.post('/api/sales').send(testSale)
-    //.field('name', 'test')
-    /*
-    const res = await fetch('http://127.0.0.1:5000/api/sales', {
-      method: 'POST',
-      body: JSON.stringify(testSale)
-    })
-    console.log(await res.json())
-    */
 
     expect(res).toHaveProperty('status', 201)
 
@@ -62,7 +54,7 @@ describe('Product sale', () => {
 
   test(
     'that the sale has ended and product is not on sale',
-    () => {
+    async () => {
       return new Promise((resolve, reject) => {
         setTimeout(async () => {
           product = await pocketBase.Records.getOne('products', productId)

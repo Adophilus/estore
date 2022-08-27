@@ -39,7 +39,6 @@ export function useNotifications({ pocketBaseClient }) {
   useEffect(() => {
     // watch the 'sales' table for changes and then trigger checkNotifications
     pocketBaseClient.realtime.subscribe('sales', (e) => {
-      console.log(e)
       if (e.action === 'create' || e.action === 'update') checkNotifications()
     })
     checkNotifications()

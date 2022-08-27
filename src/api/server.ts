@@ -18,7 +18,7 @@ export default class EStoreServer extends Server {
     this.setupConfig()
     this.setupMiddleWare()
 
-    const props = { logger: this.logger, pocketBase: this.pocketBase }
+    const props = { logger: this.logger, pocketBase: this.pocketBase, app: this.app }
     super.addControllers([
       new ProductAnalyticsApiController(props),
       new ProductShareApiController(props),
