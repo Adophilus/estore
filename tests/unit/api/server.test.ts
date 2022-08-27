@@ -9,10 +9,6 @@ chai.use(chaiHttp)
 
 const agent: any = chai.request(process.env.SERVER_BASE_URL)
 const pocketBase = new PocketBase(process.env.POCKETBASE_URL)
-const productId = 'lXXj5zaToEaSzL3'
-let product = await pocketBase.Records.getOne('products', productId, {
-  expand: 'stats'
-})
 
 // describe('PRODUCT ANALYTICS', () => {
 //   test("check that a product's sale counter is incremented", async () => {
@@ -59,17 +55,25 @@ let product = await pocketBase.Records.getOne('products', productId, {
 describe('PRODUCT SALES', () => {
   const testSale = {
     starting: Date.now(),
-    duration: 86400,
+    duration: 10 * 1000,
     title: 'Test sale',
     content: 'This is a sample test'
   }
   let latestSale
+  const productId = 'lXXj5zaToEaSzL3'
+  let product
 
-  beforeAll(async () => {
-    await agent.post('/api/sales').send(testSale)
+  test('that the product is not on sale', async () => {
+    product = await pocketBase.Records.getOne('products', productId, {
+      expand: 'stats'
+    })
+
+    expect(product).toHaveProperty('onSale', false)
   })
 
   test('that the sale has been created', async () => {
+    expect(await agent.put('/api/sales').send(testSale)).toHaveProperty('status', 201)
+
     latestSale = (
       await pocketBase.Records.getList('sales', 1, 1, { sort: '-created' })
     ).items[0]
@@ -83,14 +87,13 @@ describe('PRODUCT SALES', () => {
     expect(latestSale).toHaveProperty('content', testSale.content)
   })
 
-  test('that the sale has ended', () => {
+  test('that the sale has ended and product is not on sale', () => {
     return new Promise((resolve, reject) => {
       setTimeout(async () => {
-        await agent.post(`/api/sales/${latestSale.id}/end`).send()
         product = await pocketBase.Records.getOne('products', productId)
         expect(product).toHaveProperty('onSale', false)
-        resolve(1)
-      }, testSale.starting + testSale.duration - Date.now())
+        resolve(true)
+      }, 15)
     })
-  })
+  }, 20)
 })
