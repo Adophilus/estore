@@ -90,11 +90,8 @@ export default function ({ matches }) {
   }, [cart.items, product])
 
   useEffect(() => {
-    if (product) {
+    if (product)
       fetch(`${config.backendUrl}/api/products/analytics/${product.id}`)
-        .then((res) => res.text())
-        .then((data) => console.log(data))
-    }
   }, [product])
 
   useEffect(() => {
@@ -116,7 +113,7 @@ export default function ({ matches }) {
             <div className="row">
               <div className="col-lg-12">
                 <div className="product__details__breadcrumb">
-                  <Link href="/index">Home</Link>
+                  <Link href="/">Home</Link>
                   <Link href="/shop">Shop</Link>
                   <Link href="/shop">Products</Link>
                   <span>{product.name}</span>
@@ -195,7 +192,19 @@ export default function ({ matches }) {
                       <span> - 5 Reviews</span>
                     </div>
                     <div className="socials d-flex" style="column-gap: 10px">
-                      <a>
+                      <a
+                        href="javascript:void()"
+                        onClick={() => {
+                          window.open(
+                            'https://www.facebook.com/sharer/sharer.php?' +
+                              new URLSearchParams({
+                                u: `${config.backendUrl}/share/products/${product.slug}`
+                              })
+                          )
+                        }}
+                        rel="noopener"
+                        target="_blank"
+                      >
                         <i
                           class="fa fa-facebook"
                           style="color: #4267B2"
