@@ -5,10 +5,12 @@ import { Logger } from 'tslog'
 
 @Controller('share/products')
 export default class {
-  logger: Logger
-
-  constructor({ logger }) {
+  logger
+  pocketBase
+  
+  constructor({ logger, pocketBase }) {
     this.logger = logger.getChildLogger({ name: 'ProductShareAPI' })
+    this.pocketBase = pocketBase
   }
 
   @Get(':slug')
@@ -16,7 +18,7 @@ export default class {
     const { slug: productSlug } = req.params
 
     const product = (
-      await res.locals.pocketBase.Records.getList('products', 1, 1, {
+      await this.pocketBase.Records.getList('products', 1, 1, {
         filter: `slug = '${productSlug}'`,
         expand: 'cover'
       })

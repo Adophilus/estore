@@ -1,23 +1,28 @@
-
-import { Controller, Get } from '@overnightjs/core'
+import { Controller, Post } from '@overnightjs/core'
 import { Request, Response } from 'express'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 import { Logger } from 'tslog'
 import SaleScheduler from '../utils/SaleScheduler.js'
 
-@Controller('api/sale')
+@Controller('api/sales')
 export default class {
-  logger: Logger
+  logger
+  saleScheduler
+  pocketBase
 
-  constructor({ logger }) {
+  constructor({ logger, pocketBase }) {
     this.logger = logger.getChildLogger({ name: 'ProductShareAPI' })
+    this.pocketBase = pocketBase
     this.saleScheduler = new SaleScheduler({ pocketBase, logger })
   }
 
-  @Put()
+  @Post()
   private async createSale(req: Request, res: Response) {
+    this.logger.info(req.body)
+    this.logger.info(req.params)
+    this.logger.info(req.query)
     try {
-      const sale = await res.locals.pocketBase.Records.create('sales', req.params)
+      const sale = await this.pocketBase.Records.create('sales', req.body)
       this.saleScheduler.add(sale)
       return res.status(StatusCodes.CREATED).send({ message: ReasonPhrases.CREATED})
     }

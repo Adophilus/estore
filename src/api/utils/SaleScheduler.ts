@@ -1,5 +1,8 @@
 class SaleScheduler
 {
+  pocketBase
+  logger
+
   constructor ({ pocketBase, logger }) {
     this.pocketBase = pocketBase
     this.logger = logger.getChildLogger({ name: 'SaleScheduler' })

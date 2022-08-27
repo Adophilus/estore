@@ -8,13 +8,15 @@ import { Controller, Get } from '@overnightjs/core';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 let default_1 = class default_1 {
     logger;
-    constructor({ logger }) {
+    pocketBase;
+    constructor({ pocketBase, logger }) {
         this.logger = logger.getChildLogger({ name: 'ProductAnalyticsAPI' });
+        this.pocketBase = pocketBase;
     }
     async getProduct(req, res) {
         const { id: productId } = req.params;
         try {
-            const product = await res.locals.pocketBase.Records.getOne('products', productId, { expand: 'stats' });
+            const product = await this.pocketBase.Records.getOne('products', productId, { expand: 'stats' });
             if (product.onSale &&
                 Date.now() <
                     product['@expand'].stats.sale.started +
@@ -27,8 +29,8 @@ let default_1 = class default_1 {
                 product['@expand'].stats.sale.counter++;
                 product.onSale = false;
                 this.logger.info(`updating counter of Product(id=${productId})`);
-                await res.locals.pocketBase.Records.update('products', productId, product);
-                await res.locals.pocketBase.Records.update('product_stats', product['@expand'].stats.id, product['@expand'].stats);
+                await this.pocketBase.Records.update('products', productId, product);
+                await this.pocketBase.Records.update('product_stats', product['@expand'].stats.id, product['@expand'].stats);
                 return res.status(StatusCodes.OK).end();
             }
             product.onSale = true;
@@ -41,8 +43,8 @@ let default_1 = class default_1 {
                     1) +
                 product['@expand'].stats.discount.min);
             this.logger.info(`setting discount of ${product['@expand'].stats.discount.active}% on Product(id=${productId})`);
-            await res.locals.pocketBase.Records.update('products', productId, product);
-            await res.locals.pocketBase.Records.update('product_stats', product['@expand'].stats.id, product['@expand'].stats);
+            await this.pocketBase.Records.update('products', productId, product);
+            await this.pocketBase.Records.update('product_stats', product['@expand'].stats.id, product['@expand'].stats);
             return res.status(StatusCodes.OK).end();
         }
         catch (err) {

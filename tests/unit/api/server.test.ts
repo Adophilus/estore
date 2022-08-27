@@ -11,15 +11,20 @@ const agent: any = chai.request(process.env.SERVER_BASE_URL)
 const pocketBase = new PocketBase(process.env.POCKETBASE_URL)
 
 describe('Product sale', () => {
-  const testSale = {
-    starting: Date.now(),
-    duration: 10 * 1000,
-    title: 'Test sale',
-    content: 'This is a sample test'
-  }
+  let testSale
   let latestSale
-  const productId = 'lXXj5zaToEaSzL3'
+  let productId
   let product
+
+  beforeAll(() => {
+    testSale = {
+      starting: Date.now(),
+      duration: 10 * 1000,
+      title: 'Test sale',
+      content: 'This is a sample test'
+    }
+    productId = 'lXXj5zaToEaSzL3'
+  })
 
   test('that the product is not on sale', async () => {
     product = await pocketBase.Records.getOne('products', productId, {
@@ -30,10 +35,17 @@ describe('Product sale', () => {
   })
 
   test('that the sale has been created', async () => {
-    expect(await agent.put('/api/sales').send(testSale)).toHaveProperty(
-      'status',
-      201
-    )
+    const res = await agent.post('/api/sales').send(testSale)
+    //.field('name', 'test')
+    /*
+    const res = await fetch('http://127.0.0.1:5000/api/sales', {
+      method: 'POST',
+      body: JSON.stringify(testSale)
+    })
+    console.log(await res.json())
+    */
+
+    expect(res).toHaveProperty('status', 201)
 
     latestSale = (
       await pocketBase.Records.getList('sales', 1, 1, { sort: '-created' })
@@ -48,13 +60,17 @@ describe('Product sale', () => {
     expect(latestSale).toHaveProperty('content', testSale.content)
   })
 
-  test('that the sale has ended and product is not on sale', () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(async () => {
-        product = await pocketBase.Records.getOne('products', productId)
-        expect(product).toHaveProperty('onSale', false)
-        resolve(true)
-      }, 15)
-    })
-  }, 20)
+  test(
+    'that the sale has ended and product is not on sale',
+    () => {
+      return new Promise((resolve, reject) => {
+        setTimeout(async () => {
+          product = await pocketBase.Records.getOne('products', productId)
+          expect(product).toHaveProperty('onSale', false)
+          resolve(true)
+        }, 15)
+      })
+    },
+    20 * 1000
+  )
 })

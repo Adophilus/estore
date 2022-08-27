@@ -1,23 +1,28 @@
 import ProductAnalyticsApiController from './controllers/ProductAnalytics.js'
 import ProductShareApiController from './controllers/ProductShare.js'
+import SaleController from './controllers/Sale.js'
 import { Server } from '@overnightjs/core'
 import cors from 'cors'
+import bodyParser from 'body-parser';
 import * as dotenv from 'dotenv'
 import PocketBase from 'pocketbase'
 import { Logger } from 'tslog'
 
 export default class EStoreServer extends Server {
   private readonly SERVER_START_MSG = 'Server running on port: '
-  private logger: Logger
-  private pocketBase: PocketBase
+  private logger
+  private pocketBase
 
   constructor() {
     super()
     this.setupConfig()
     this.setupMiddleWare()
+
+    const props = { logger: this.logger, pocketBase: this.pocketBase }
     super.addControllers([
-      new ProductAnalyticsApiController({ logger: this.logger }),
-      new ProductShareApiController({ logger: this.logger })
+      new ProductAnalyticsApiController(props),
+      new ProductShareApiController(props),
+      new SaleController(props)
     ])
     this.errorPages()
   }
@@ -34,6 +39,8 @@ export default class EStoreServer extends Server {
     this.app.set('views', 'src/api/views')
     this.app.set('view engine', 'pug')
     this.app.use(cors())
+this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({extended: true}));
     this.app.use((req, res, next) => {
       res.locals.pocketBase = this.pocketBase
       next()

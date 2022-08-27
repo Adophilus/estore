@@ -5,17 +5,19 @@ import { Logger } from 'tslog'
 
 @Controller('api/products/analytics')
 export default class {
-  logger: Logger
+  logger
+  pocketBase
 
-  constructor({ logger }) {
+  constructor({ pocketBase, logger }) {
     this.logger = logger.getChildLogger({ name: 'ProductAnalyticsAPI' })
+    this.pocketBase = pocketBase
   }
 
   @Get(':id')
   private async getProduct(req: Request, res: Response) {
     const { id: productId } = req.params
     try {
-      const product = await res.locals.pocketBase.Records.getOne(
+      const product = await this.pocketBase.Records.getOne(
         'products',
         productId,
         { expand: 'stats' }
@@ -38,12 +40,12 @@ export default class {
         product['@expand'].stats.sale.counter++
         product.onSale = false
         this.logger.info(`updating counter of Product(id=${productId})`)
-        await res.locals.pocketBase.Records.update(
+        await this.pocketBase.Records.update(
           'products',
           productId,
           product
         )
-        await res.locals.pocketBase.Records.update(
+        await this.pocketBase.Records.update(
           'product_stats',
           product['@expand'].stats.id,
           product['@expand'].stats
@@ -66,8 +68,8 @@ export default class {
       this.logger.info(
         `setting discount of ${product['@expand'].stats.discount.active}% on Product(id=${productId})`
       )
-      await res.locals.pocketBase.Records.update('products', productId, product)
-      await res.locals.pocketBase.Records.update(
+      await this.pocketBase.Records.update('products', productId, product)
+      await this.pocketBase.Records.update(
         'product_stats',
         product['@expand'].stats.id,
         product['@expand'].stats

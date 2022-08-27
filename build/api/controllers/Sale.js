@@ -4,34 +4,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { Controller, Get } from '@overnightjs/core';
+import { Controller, Post } from '@overnightjs/core';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import SaleScheduler from '../utils/SaleScheduler.js';
 let default_1 = class default_1 {
     logger;
+    saleScheduler;
     pocketBase;
     constructor({ logger, pocketBase }) {
         this.logger = logger.getChildLogger({ name: 'ProductShareAPI' });
         this.pocketBase = pocketBase;
+        this.saleScheduler = new SaleScheduler({ pocketBase, logger });
     }
-    async getProduct(req, res) {
-        const { slug: productSlug } = req.params;
-        const product = (await this.pocketBase.Records.getList('products', 1, 1, {
-            filter: `slug = '${productSlug}'`,
-            expand: 'cover'
-        })).items[0];
-        if (!product)
-            return res.status(StatusCodes.NOT_FOUND).send(ReasonPhrases.NOT_FOUND);
-        return res.render('product/share', {
-            product,
-            pocketBaseURL: process.env.POCKETBASE_URL,
-            frontendBaseUrl: process.env.FRONTEND_BASE_URL
-        });
+    async createSale(req, res) {
+        this.logger.info(req.body);
+        this.logger.info(req.params);
+        this.logger.info(req.query);
+        try {
+            const sale = await this.pocketBase.Records.create('sales', req.body);
+            this.saleScheduler.add(sale);
+            return res.status(StatusCodes.CREATED).send({ message: ReasonPhrases.CREATED });
+        }
+        catch (err) {
+            this.logger.error(err);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: ReasonPhrases.INTERNAL_SERVER_ERROR });
+        }
     }
 };
 __decorate([
-    Get(':slug')
-], default_1.prototype, "getProduct", null);
+    Post()
+], default_1.prototype, "createSale", null);
 default_1 = __decorate([
-    Controller('share/products')
+    Controller('api/sales')
 ], default_1);
 export default default_1;
