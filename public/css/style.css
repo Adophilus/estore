@@ -2018,6 +2018,7 @@ ol {
 }
 
 .product__details__tab .nav-tabs .nav-item .nav-link.active {
+  color: black;
   border-bottom: 2px solid #e53637;
 }
 
