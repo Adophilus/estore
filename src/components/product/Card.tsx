@@ -1,4 +1,5 @@
 import '../../assets/product.css'
+import ProductRating from '../../components/product/Rating.tsx'
 import AppContext from '../../contexts/App'
 import { Link } from 'preact-router/match'
 import { useContext, useEffect, useRef, useState } from 'preact/hooks'
@@ -87,13 +88,7 @@ export default function ({ product }) {
           <a onClick={() => addToCart()} className="add-cart">
             + Add To Cart
           </a>
-          <div className="rating">
-            <i className="fa fa-star-o"></i>
-            <i className="fa fa-star-o"></i>
-            <i className="fa fa-star-o"></i>
-            <i className="fa fa-star-o"></i>
-            <i className="fa fa-star-o"></i>
-          </div>
+          <ProductRating product={product} />
           <h5>
             {product.onSale ? (
               <>

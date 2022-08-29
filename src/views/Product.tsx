@@ -2,6 +2,7 @@ import '../assets/favourites.css'
 import '../assets/product.css'
 import Layout from '../components/layout/Layout'
 import ProductPrice from '../components/product/Price'
+import ProductRating from '../components/product/Rating'
 import AppContext from '../contexts/App'
 import { Link } from 'preact-router/match'
 import { useContext, useEffect, useRef, useState } from 'preact/hooks'
@@ -19,7 +20,7 @@ export default function ({ matches }) {
   const getProduct = async () => {
     const res = await pocketBaseClient.Records.getList('products', 1, 1, {
       filter: `slug = '${slug}'`,
-      expand: 'category,images,sizes,tags'
+      expand: 'category,images,sizes,tags,stats'
     })
     setTabImage(res.items[0]['@expand'].images[0])
     setProduct(res.items[0])
@@ -183,14 +184,7 @@ export default function ({ matches }) {
                     style="column-gap: 10px"
                     className="d-flex justify-content-center g-2"
                   >
-                    <div className="rating">
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star-o"></i>
-                      <span> - 5 Reviews</span>
-                    </div>
+                    <ProductRating product={product} />
                     <div className="socials d-flex" style="column-gap: 10px">
                       <a
                         href="javascript:void()"
