@@ -62,7 +62,7 @@ export default function () {
         $autoCancel: false,
         filter,
         sort: 'name',
-        expand: 'cover'
+        expand: 'cover,stats'
       }
     )
     setProducts(res)

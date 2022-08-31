@@ -88,7 +88,7 @@ export default function ({ product }) {
           <a onClick={() => addToCart()} className="add-cart">
             + Add To Cart
           </a>
-          <ProductRating product={product} />
+          <ProductRating product={product} reviews={false} />
           <h5>
             {product.onSale ? (
               <>

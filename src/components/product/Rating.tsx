@@ -1,4 +1,4 @@
-export default function ({ product }) {
+export default function ({ product, reviews }) {
   return (
     <div className="rating">
       {Array(Math.floor(product['@expand'].stats.rating.average))
@@ -11,13 +11,15 @@ export default function ({ product }) {
         .map((_) => (
           <i className="fa fa-star-o"></i>
         ))}
-      <span>
-        &nbsp;-&nbsp;
-        {Object.keys(product['@expand'].stats.rating.stars)
-          .map((star) => product['@expand'].stats.rating.stars[star])
-          .reduce((prev, next) => prev + next)}
-        &nbsp; Reviews
-      </span>
+      {reviews && (
+        <span>
+          &nbsp;-&nbsp;
+          {Object.keys(product['@expand'].stats.rating.stars)
+            .map((star) => product['@expand'].stats.rating.stars[star])
+            .reduce((prev, next) => prev + next)}
+          &nbsp; Reviews
+        </span>
+      )}
     </div>
   )
 }

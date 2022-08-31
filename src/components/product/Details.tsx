@@ -1,4 +1,40 @@
+import AppContext from '../../contexts/App'
+import RatingHover from './RatingHover.tsx'
+import { useContext, useRef, useState } from 'preact/hooks'
+
 export default function ({ product }) {
+  const { config } = useContext(AppContext)
+  const rating = useRef(1)
+  const review = useRef()
+  const submitBtn = useRef()
+  const [error, setError] = useState(false)
+
+  const onSubmitReview = async (e) => {
+    e.preventDefault()
+    submitBtn.current.disabled = true
+
+    if (!review.current.value) {
+      setError('Review cannot be empty!')
+      submitBtn.current.disabled = false
+      return
+    }
+
+    try {
+      await fetch(`${config.backendUrl}/api/rating`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          review: review.current.value,
+          rating: rating.current
+        })
+      })
+      submitBtn.current.disabled = false
+    } catch (err) {
+      setError(err)
+      console.log(err)
+      submitBtn.current.disabled = false
+    }
+  }
+
   return (
     <div className="product__details__tab">
       <ul className="nav nav-tabs" role="tablist">
@@ -83,29 +119,46 @@ export default function ({ product }) {
               ))}
           </div>
           <div className="product__details__tab__content">
-            <div>
-              <div className="form__control mb-3">
-                <i className="fa fa-user px-3" aria-hidden="true"></i>
-                <input
-                  type="email"
-                  onChange={(e) => (email.current = e.target.value)}
-                  placeholder="email"
-                />
-              </div>
-              <div className="form__control mb-3">
-                <i className="fa fa-lock px-3" aria-hidden="true"></i>
-                <input
-                  type="password"
-                  onChange={(e) => (password.current = e.target.value)}
-                  placeholder="password"
-                />
-              </div>
-              <div className="form__control sliding-color mb-3 border-0">
-                <button className="w-100 py-2" type="submit">
-                  <span>LOGIN</span>
+            {error && (
+              <div
+                class="alert alert-danger alert-dismissible fade show"
+                role="alert"
+              >
+                {error}
+                <button
+                  type="button"
+                  class="close"
+                  onClick={() => setError(false)}
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-            </div>
+            )}
+            <form onSubmit={(e) => onSubmitReview(e)}>
+              <div className="form__control">
+                <textarea
+                  placeholder="Type in review..."
+                  rows="4"
+                  className="w-100"
+                  ref={review}
+                  style="border: 1px solid #3d3d3d; resize: none"
+                ></textarea>
+              </div>
+              <div className="form__control d-flex justify-content-end">
+                <RatingHover
+                  defaultRating={1}
+                  onChange={(rating) => (rating.current = rating)}
+                />
+                <button
+                  className="primary-btn ml-3"
+                  type="submit"
+                  ref={submitBtn}
+                >
+                  SUBMIT
+                </button>
+              </div>
+            </form>
           </div>
         </div>
         <div className="tab-pane" id="tabs-7" role="tabpanel">
