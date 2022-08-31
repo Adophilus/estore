@@ -20,7 +20,7 @@ export default function ({ product }) {
     }
 
     try {
-      await fetch(`${config.backendUrl}/api/rating`, {
+      await fetch(`${config.backendUrl}/api/products/rating/${product.id}`, {
         method: 'PUT',
         body: JSON.stringify({
           review: review.current.value,
