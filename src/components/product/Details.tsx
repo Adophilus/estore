@@ -16,11 +16,7 @@ export default function ({ product }) {
         </li>
         <li className="nav-item">
           <a className="nav-link" data-toggle="tab" href="#tabs-6" role="tab">
-            Customer Reviews (
-            {Object.keys(product['@expand'].stats.rating.stars)
-              .map((star) => product['@expand'].stats.rating.stars[star])
-              .reduce((prev, next) => prev + next)}
-            )
+            Customer Reviews ({product['@expand'].stats.reviews.length})
           </a>
         </li>
         <li className="nav-item">

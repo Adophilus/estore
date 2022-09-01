@@ -18,7 +18,7 @@ export default class {
   private async createProductRating (req: Request, res: Response) {
     const { id: productId } = req.params
     try {
-      const review  = await this.pocketBase.Records.create('product_reviews', { creator: 'Dummy user', stars: req.body.stars, review: req.body.review })
+      const review  = await this.pocketBase.Records.create('product_reviews', { creator: req.body.creator, stars: req.body.stars, review: req.body.review })
       const product = await this.pocketBase.Records.get(productId, { expand: 'stats'})
       const reviews = [ ...product['@expand'].stats.reviews, review.id ]
       const rating = { ...product['@expand'].stats.rating }
