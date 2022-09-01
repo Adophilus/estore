@@ -49,9 +49,11 @@ export default function ({ product }) {
       )
       //review.current.value = ''
       submitBtn.current.disabled = false
+      setError(false)
       setSuccess((await res.json()).message)
     } catch (err) {
-      setError(err)
+      setSuccess(false)
+      setError('An error occurred while submitting your review!')
       console.log(err)
       submitBtn.current.disabled = false
     }
