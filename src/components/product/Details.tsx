@@ -1,40 +1,6 @@
-import AppContext from '../../contexts/App'
-import RatingHover from './RatingHover.tsx'
-import { useContext, useRef, useState } from 'preact/hooks'
+import ProductReviews from './Reviews.tsx'
 
 export default function ({ product }) {
-  const { config } = useContext(AppContext)
-  const rating = useRef(1)
-  const review = useRef()
-  const submitBtn = useRef()
-  const [error, setError] = useState(false)
-
-  const onSubmitReview = async (e) => {
-    e.preventDefault()
-    submitBtn.current.disabled = true
-
-    if (!review.current.value) {
-      setError('Review cannot be empty!')
-      submitBtn.current.disabled = false
-      return
-    }
-
-    try {
-      await fetch(`${config.backendUrl}/api/products/rating/${product.id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-          review: review.current.value,
-          rating: rating.current
-        })
-      })
-      submitBtn.current.disabled = false
-    } catch (err) {
-      setError(err)
-      console.log(err)
-      submitBtn.current.disabled = false
-    }
-  }
-
   return (
     <div className="product__details__tab">
       <ul className="nav nav-tabs" role="tablist">
@@ -109,57 +75,7 @@ export default function ({ product }) {
           </div>
         </div>
         <div className="tab-pane" id="tabs-6" role="tabpanel">
-          <div className="product__details__tab__content">
-            {product['@expand'].stats['@expand'].reviews
-              .splice(0, 5)
-              .map((review) => (
-                <div className="product__details__tab__content__item separate-y">
-                  <p>{review.review}</p>
-                </div>
-              ))}
-          </div>
-          <div className="product__details__tab__content">
-            {error && (
-              <div
-                class="alert alert-danger alert-dismissible fade show"
-                role="alert"
-              >
-                {error}
-                <button
-                  type="button"
-                  class="close"
-                  onClick={() => setError(false)}
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-            )}
-            <form onSubmit={(e) => onSubmitReview(e)}>
-              <div className="form__control">
-                <textarea
-                  placeholder="Type in review..."
-                  rows="4"
-                  className="w-100"
-                  ref={review}
-                  style="border: 1px solid #3d3d3d; resize: none"
-                ></textarea>
-              </div>
-              <div className="form__control d-flex justify-content-end">
-                <RatingHover
-                  defaultRating={1}
-                  onChange={(rating) => (rating.current = rating)}
-                />
-                <button
-                  className="primary-btn ml-3"
-                  type="submit"
-                  ref={submitBtn}
-                >
-                  SUBMIT
-                </button>
-              </div>
-            </form>
-          </div>
+          <ProductReviews product={product} />
         </div>
         <div className="tab-pane" id="tabs-7" role="tabpanel">
           <div className="product__details__tab__content">
