@@ -21,10 +21,11 @@ let default_1 = class default_1 {
                 trending: product['@expand'].stats.trending + 1,
                 views: product['@expand'].stats.views + 1,
             });
-            return res.status(StatusCodes.OK).send(ReasonPhrases.OK);
+            return res.status(StatusCodes.OK).send({ message: ReasonPhrases.OK });
         }
         catch (err) {
             this.logger.error(err);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: ReasonPhrases.INTERNAL_SERVER_ERROR });
         }
     }
 };

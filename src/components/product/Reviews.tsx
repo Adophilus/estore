@@ -40,10 +40,14 @@ export default function ({ product }) {
       const res = await fetch(
         `${config.backendUrl}/api/products/rating/${product.id}`,
         {
+          headers: {
+            'Content-Type': 'application/json'
+          },
           method: 'PUT',
           body: JSON.stringify({
-            review: review.current.value,
-            rating: rating.current
+            creator: 'Dummy creator',
+            stars: rating.current,
+            review: review.current.value
           })
         }
       )
@@ -140,7 +144,7 @@ export default function ({ product }) {
           <div className="form__control d-flex justify-content-end">
             <RatingHover
               defaultRating={1}
-              onChange={(rating) => (rating.current = rating)}
+              onChange={(_rating) => (rating.current = _rating)}
             />
             <button className="primary-btn ml-3" type="submit" ref={submitBtn}>
               SUBMIT

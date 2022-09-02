@@ -185,7 +185,7 @@ export default function ({ matches }) {
                     style="column-gap: 10px"
                     className="d-flex justify-content-center g-2"
                   >
-                    <ProductRating product={product} />
+                    <ProductRating product={product} reviews={true} />
                     <div className="socials d-flex" style="column-gap: 10px">
                       <a
                         href="javascript:void()"

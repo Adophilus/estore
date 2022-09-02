@@ -1,5 +1,6 @@
 import ProductAnalyticsApiController from './controllers/ProductAnalytics.js'
 import ProductShareApiController from './controllers/ProductShare.js'
+import ProductRatingApiController from './controllers/ProductRating.js'
 import SaleController from './controllers/Sale.js'
 import { Server } from '@overnightjs/core'
 import cors from 'cors'
@@ -22,6 +23,7 @@ export default class EStoreServer extends Server {
     super.addControllers([
       new ProductAnalyticsApiController(props),
       new ProductShareApiController(props),
+      new ProductRatingApiController(props),
       new SaleController(props)
     ])
     this.errorPages()

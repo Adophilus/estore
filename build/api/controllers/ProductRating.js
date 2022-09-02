@@ -16,18 +16,19 @@ let default_1 = class default_1 {
     async createProductRating(req, res) {
         const { id: productId } = req.params;
         try {
+            this.logger.info(req.body);
             const review = await this.pocketBase.Records.create('product_reviews', { creator: req.body.creator, stars: req.body.stars, review: req.body.review });
-            const product = await this.pocketBase.Records.get(productId, { expand: 'stats' });
+            const product = await this.pocketBase.Records.getOne('products', productId, { expand: 'stats' });
             const reviews = [...product['@expand'].stats.reviews, review.id];
             const rating = { ...product['@expand'].stats.rating };
             rating.stars[`${req.body.stars}`] += 1;
-            rating.average = //recompute average
-                await this.pocketBase.update('product_stats', product.stats, { reviews, rating });
-            return res.status(StatusCodes.OK).send(ReasonPhrases.OK);
+            rating.average = Object.keys(rating.stars).map(star => parseInt(star) * rating.stars[`${star}`]).reduce((prev, next) => prev + next) / Object.keys(rating.stars).map(star => rating.stars[`${star}`]).reduce((prev, next) => prev + next);
+            await this.pocketBase.Records.update('product_stats', product.stats, { reviews, rating });
+            return res.status(StatusCodes.OK).send({ message: ReasonPhrases.OK });
         }
         catch (err) {
             this.logger.error(err);
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(ReasonPhrases.INTERNAL_SERVER_ERROR);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: ReasonPhrases.INTERNAL_SERVER_ERROR });
         }
     }
 };
