@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { Controller, Put } from '@overnightjs/core';
-import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 let default_1 = class default_1 {
     logger;
     pocketBase;
@@ -24,11 +24,11 @@ let default_1 = class default_1 {
             rating.stars[`${req.body.stars}`] += 1;
             rating.average = Object.keys(rating.stars).map(star => parseInt(star) * rating.stars[`${star}`]).reduce((prev, next) => prev + next) / Object.keys(rating.stars).map(star => rating.stars[`${star}`]).reduce((prev, next) => prev + next);
             await this.pocketBase.Records.update('product_stats', product.stats, { reviews, rating });
-            return res.status(StatusCodes.OK).send({ message: ReasonPhrases.OK });
+            return res.status(StatusCodes.OK).send({ message: "Review submitted!" });
         }
         catch (err) {
             this.logger.error(err);
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: ReasonPhrases.INTERNAL_SERVER_ERROR });
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: "An error occurred while submitting review!" });
         }
     }
 };

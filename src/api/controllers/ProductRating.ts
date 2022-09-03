@@ -27,11 +27,11 @@ export default class {
       rating.stars[`${req.body.stars}`] += 1
       rating.average = Object.keys(rating.stars).map(star => parseInt(star) * rating.stars[`${star}`]).reduce((prev, next) => prev + next) / Object.keys(rating.stars).map(star => rating.stars[`${star}`]).reduce((prev, next) => prev + next)
       await this.pocketBase.Records.update('product_stats', product.stats, { reviews, rating })
-      return res.status(StatusCodes.OK).send({ message: ReasonPhrases.OK })
+      return res.status(StatusCodes.OK).send({ message: "Review submitted!" })
     }
     catch (err) {
       this.logger.error(err)
-      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: ReasonPhrases.INTERNAL_SERVER_ERROR })
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: "An error occurred while submitting review!" })
     }
   }
 }

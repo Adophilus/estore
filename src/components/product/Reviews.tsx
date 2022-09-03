@@ -12,6 +12,7 @@ export default function ({ product }) {
   const submitBtn = useRef()
 
   const getProductReviews = async () => {
+    window.p = pocketBaseClient
     setReviews(
       await Promise.all(
         [...product['@expand'].stats.reviews]
@@ -45,13 +46,13 @@ export default function ({ product }) {
           },
           method: 'PUT',
           body: JSON.stringify({
-            creator: 'Dummy creator',
+            creator: pocketBaseClient.authStore.model.profile.firstName,
             stars: rating.current,
             review: review.current.value
           })
         }
       )
-      //review.current.value = ''
+      review.current.value = ''
       submitBtn.current.disabled = false
       setError(false)
       setSuccess((await res.json()).message)
@@ -59,6 +60,7 @@ export default function ({ product }) {
       setSuccess(false)
       setError('An error occurred while submitting your review!')
       console.log(err)
+      console.log(err.status)
       submitBtn.current.disabled = false
     }
   }
